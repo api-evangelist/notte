@@ -1,0 +1,80 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Notte
+providerId: notte
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Web Agents
+- Browser Automation
+- Sessions
+- Scraping
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Notte governs usage primarily through plan-based operational limits and a
+  credit balance rather than fixed per-endpoint request rates. Each subscription
+  tier caps browser concurrency (Free 5, Developer 25, Startup 100), concurrent
+  agents/functions (Developer 25, Startup 100), and maximum session length (Free
+  15 min, Developer 120 min, Startup 300 min, hard cap 1440 min). Sessions also
+  enforce an idle timeout (default 3 min, max 15). Agents are bounded by a
+  max_steps parameter (1-150, default 20). When the credit balance is exhausted
+  or a concurrency/duration ceiling is hit, further work is blocked until
+  credits are topped up or capacity frees. Specific per-endpoint HTTP request
+  rates are documented at the API reference rate-limits page and are not
+  reconciled in this artifact.
+notes: >-
+  Verify per-endpoint request rates and current tier ceilings against the Notte
+  API reference rate-limits page on reconciliation; concurrency, session
+  duration, and credit allowances change with the plan and over time.
+sources:
+- https://docs.notte.cc/api-reference/rate-limits
+- https://notte.cc/pricing
+- https://docs.notte.cc/api-reference/errors
+responseCodes:
+  throttled: 429
+limits:
+- name: Browser Concurrency
+  scope: account
+  metric: concurrent_browsers
+  limit: 5 (Free) / 25 (Developer) / 100 (Startup) / custom (Enterprise)
+  notes: Maximum simultaneously open cloud browser sessions.
+- name: Concurrent Agents / Functions
+  scope: account
+  metric: concurrent_runs
+  limit: 25 (Developer) / 100 (Startup) / custom (Enterprise)
+  notes: Maximum simultaneous agent and function runs.
+- name: Max Session Duration
+  scope: session
+  metric: minutes
+  limit: 15 (Free) / 120 (Developer) / 300 (Startup); hard cap 1440
+  notes: max_duration_minutes per session; default 15, maximum 1440.
+- name: Session Idle Timeout
+  scope: session
+  metric: minutes
+  limit: 3 default, 15 max
+  notes: idle_timeout_minutes; session closes after inactivity.
+- name: Agent Max Steps
+  scope: agent
+  metric: steps
+  limit: 20 default, 1-150 range
+  notes: max_steps bounds how many actions an agent run may take.
+- name: Credit Balance
+  scope: account
+  metric: credits
+  limit: per plan allowance plus top-ups
+  notes: Work halts when credits are exhausted; sessions/functions/proxies/LLM tokens draw down credits.
+policies:
+- name: Plan-Based Limits
+  description: Concurrency, session duration, and credit allowances raise as accounts move from Free to Developer to Startup to Enterprise.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on HTTP 429 responses.
+- name: Credit Top-Up
+  description: Exhausted credit balances can be replenished via non-expiring manual top-ups to continue running.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

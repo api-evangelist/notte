@@ -1,0 +1,304 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Notte
+providerId: notte
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- Web Agents
+- Browser Automation
+- Sessions
+- Scraping
+- Plans
+description: >-
+  Notte uses a credit-based model layered on top of monthly subscription tiers
+  (Free, Developer, Startup, Enterprise). Plans grant a credit allowance plus
+  operational limits (browser concurrency, concurrent agents/functions, max
+  session length). Credits are consumed by browser sessions and functions
+  ($0.05/hour), residential proxies ($10/GB), and LLM tokens (pass-through, no
+  markup). Free credits and manually purchased top-ups do not expire; monthly
+  allocation credits expire monthly. The core Notte framework is open source
+  under the Server Side Public License v1 (SSPL-1.0), so teams may self-host the
+  framework and pay only for the managed cloud they consume.
+notes: >-
+  Tier prices, credit allowances, and usage rates as published on the Notte
+  pricing page (notte.cc/pricing). Verify current values on the page; usage
+  rates and tier limits may change.
+sources:
+- https://notte.cc/pricing
+- https://docs.notte.cc
+- https://github.com/nottelabs/notte
+plans:
+- id: notte-free
+  name: Free
+  type: free
+  description: >-
+    Free tier with a one-time, non-expiring $10 credit allowance to evaluate the
+    platform.
+  entries:
+  - label: Included Credits
+    name: free_credits
+    type: flat
+    metric: credits
+    limit: 10
+    timeFrame: lifetime
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  - label: Browser Concurrency
+    name: browser_concurrency
+    type: flat
+    metric: concurrent_browsers
+    limit: 5
+    timeFrame: instant
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Max Session Length
+    name: max_session
+    type: flat
+    metric: minutes
+    limit: 15
+    timeFrame: session
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Agents
+  - name: Scraping
+  - name: Personas
+  - name: Vaults
+- id: notte-developer
+  name: Developer
+  type: subscription
+  description: >-
+    $20/month subscription granting $20 of monthly (expiring) credits with
+    raised concurrency and longer sessions.
+  entries:
+  - label: Subscription
+    name: developer_subscription
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $20/month
+    userMultiplied: false
+  - label: Included Credits
+    name: developer_credits
+    type: flat
+    metric: credits
+    limit: 20
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included (expire monthly)
+    userMultiplied: false
+  - label: Browser Concurrency
+    name: browser_concurrency
+    type: flat
+    metric: concurrent_browsers
+    limit: 25
+    timeFrame: instant
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Concurrent Agents / Functions
+    name: concurrent_agents
+    type: flat
+    metric: concurrent_runs
+    limit: 25
+    timeFrame: instant
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Max Session Length
+    name: max_session
+    type: flat
+    metric: minutes
+    limit: 120
+    timeFrame: session
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Agents
+  - name: Scraping
+  - name: Personas
+  - name: Vaults
+  - name: Functions
+- id: notte-startup
+  name: Startup
+  type: subscription
+  description: >-
+    $100/month subscription granting $100 of monthly (expiring) credits, high
+    concurrency, longest standard sessions, and bring-your-own keys/proxies.
+  entries:
+  - label: Subscription
+    name: startup_subscription
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $100/month
+    userMultiplied: false
+  - label: Included Credits
+    name: startup_credits
+    type: flat
+    metric: credits
+    limit: 100
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included (expire monthly)
+    userMultiplied: false
+  - label: Browser Concurrency
+    name: browser_concurrency
+    type: flat
+    metric: concurrent_browsers
+    limit: 100
+    timeFrame: instant
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Concurrent Agents / Functions
+    name: concurrent_agents
+    type: flat
+    metric: concurrent_runs
+    limit: 100
+    timeFrame: instant
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Max Session Length
+    name: max_session
+    type: flat
+    metric: minutes
+    limit: 300
+    timeFrame: session
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Bring Your Own Keys / Proxies
+    name: byo_keys_proxies
+    type: flat
+    metric: feature
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Agents
+  - name: Scraping
+  - name: Personas
+  - name: Vaults
+  - name: Functions
+- id: notte-usage
+  name: Usage Rates
+  type: usage
+  description: >-
+    Credit-metered usage rates applied across all subscription tiers. Browser
+    sessions and functions are billed per hour, residential proxies per GB, and
+    LLM tokens are passed through at cost with no markup.
+  entries:
+  - label: Browser Sessions
+    name: browser_sessions
+    type: usage
+    metric: hours
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.05 / hour
+    userMultiplied: false
+  - label: Browser Functions
+    name: browser_functions
+    type: usage
+    metric: hours
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.05 / hour
+    userMultiplied: false
+  - label: Residential Proxies
+    name: residential_proxies
+    type: usage
+    metric: gigabytes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $10 / GB
+    userMultiplied: false
+  - label: LLM Tokens
+    name: llm_tokens
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: pass-through (no markup)
+    userMultiplied: false
+  - label: Additional Credits Top-Up
+    name: credit_topup
+    type: usage
+    metric: credits
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: manual top-up, non-expiring
+    userMultiplied: false
+  elements:
+  - name: Sessions
+  - name: Functions
+  - name: Proxies
+  - name: LLM Tokens
+- id: notte-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom pricing with custom credit allocation and limits, SSO, SLAs, HIPAA,
+    and on-premise deployment. Contact Notte sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: custom / contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Credits and Limits
+  - name: SSO
+  - name: SLAs
+  - name: HIPAA
+  - name: On-Premise Deployment
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

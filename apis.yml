@@ -1,0 +1,164 @@
+aid: notte
+url: https://raw.githubusercontent.com/api-evangelist/notte/refs/heads/main/apis.yml
+name: Notte
+kind: company
+description: Notte is web browser and agent infrastructure for AI. The REST API at
+  api.notte.cc provisions cloud browser sessions, runs autonomous web agents from
+  natural-language tasks, observes and acts on pages, scrapes structured data, and
+  manages personas, vaults, profiles, and serverless functions. The core framework
+  is open source (SSPL-1.0) on GitHub under nottelabs.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- Web Agents
+- Browser Automation
+- Sessions
+- Scraping
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: notte:sessions
+  name: Notte Sessions API
+  tags:
+  - Sessions
+  - Cloud Browser
+  - CDP
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.notte.cc/api-reference/sessions/session-start
+  baseURL: https://api.notte.cc
+  properties:
+  - url: https://docs.notte.cc/features/sessions/overview
+    type: Documentation
+  - url: https://docs.notte.cc/api-reference/sessions/session-start
+    type: APIReference
+  - url: openapi/notte-openapi.yml
+    type: OpenAPI
+  - url: collections/notte.postman_collection.json
+    type: PostmanCollection
+  - url: collections/notte.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/nottelabs/notte
+    type: GitHub
+  description: Start, status, and stop remote cloud browser sessions with stealth,
+    proxies, and CAPTCHA solving. Manage cookies, network logs, replay, debug info,
+    and CDP/viewer connection URLs for Playwright, Puppeteer, Selenium, or browser-use.
+- aid: notte:agents
+  name: Notte Agents API
+  tags:
+  - Agents
+  - Autonomous
+  - Natural Language
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.notte.cc/api-reference/agents/agent-start
+  baseURL: https://api.notte.cc
+  properties:
+  - url: https://docs.notte.cc/features/agents/overview
+    type: Documentation
+  - url: https://docs.notte.cc/api-reference/agents/agent-start
+    type: APIReference
+  - url: openapi/notte-openapi.yml
+    type: OpenAPI
+  - url: collections/notte.postman_collection.json
+    type: PostmanCollection
+  - url: collections/notte.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/nottelabs/notte
+    type: GitHub
+  description: Run autonomous web agents that take a natural-language task and act
+    on a browser session. Start, poll status, stop, list agents, request structured
+    (Pydantic) output, and retrieve the generated workflow script.
+- aid: notte:page
+  name: Notte Page Observe / Step / Scrape API
+  tags:
+  - Perception
+  - Observe
+  - Step
+  - Scrape
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.notte.cc/api-reference/sessions/page-observe
+  baseURL: https://api.notte.cc
+  properties:
+  - url: https://docs.notte.cc/features/perception/overview
+    type: Documentation
+  - url: https://docs.notte.cc/api-reference/sessions/page-observe
+    type: APIReference
+  - url: openapi/notte-openapi.yml
+    type: OpenAPI
+  - url: collections/notte.postman_collection.json
+    type: PostmanCollection
+  - url: collections/notte.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/nottelabs/notte
+    type: GitHub
+  description: Notte's perception layer for a live session - observe the page to list
+    available actions, execute (step) an action such as click/fill/scroll/navigate,
+    scrape structured content from the current page, and capture screenshots.
+- aid: notte:scrape
+  name: Notte Scraping API
+  tags:
+  - Scraping
+  - Extraction
+  - Structured Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+  baseURL: https://api.notte.cc
+  properties:
+  - url: https://docs.notte.cc/features/scraping/overview
+    type: Documentation
+  - url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+    type: APIReference
+  - url: openapi/notte-openapi.yml
+    type: OpenAPI
+  - url: collections/notte.postman_collection.json
+    type: PostmanCollection
+  - url: collections/notte.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/nottelabs/notte
+    type: GitHub
+  description: One-shot scraping endpoints that fetch a URL (or accept raw HTML) and
+    return main content, links, images, or AI-extracted structured data against a
+    response format, plus an AI web search endpoint.
+- aid: notte:personas-vaults
+  name: Notte Personas and Vaults API
+  tags:
+  - Personas
+  - Vaults
+  - Credentials
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.notte.cc/api-reference/personas/persona-create
+  baseURL: https://api.notte.cc
+  properties:
+  - url: https://docs.notte.cc/features/personas/overview
+    type: Documentation
+  - url: https://docs.notte.cc/api-reference/personas/persona-create
+    type: APIReference
+  - url: openapi/notte-openapi.yml
+    type: OpenAPI
+  - url: collections/notte.postman_collection.json
+    type: PostmanCollection
+  - url: collections/notte.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/nottelabs/notte
+    type: GitHub
+  description: Personas are disposable digital identities with email addresses, phone
+    numbers, and automated 2FA for account workflows. Vaults securely store credentials
+    and credit cards that are injected into agent and session runs.
+common:
+- type: GitHubOrganization
+  url: https://github.com/nottelabs
+- type: LinkedIn
+  url: https://www.linkedin.com/company/nottelabs
+- type: Website
+  url: https://notte.cc
+- type: Documentation
+  url: https://docs.notte.cc
+- type: Plans
+  url: plans/notte-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/notte-rate-limits.yml
+- type: FinOps
+  url: finops/notte-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

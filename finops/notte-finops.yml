@@ -1,0 +1,119 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Notte
+providerId: notte
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- Web Agents
+- Browser Automation
+- Sessions
+- Scraping
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Notte spend. Notte bills a monthly subscription per tier
+  (Developer $20, Startup $100, Enterprise custom) that grants a credit
+  allowance, then meters credit consumption: browser sessions and functions at
+  $0.05/hour, residential proxies at $10/GB, and LLM tokens at pass-through cost
+  with no markup. Free credits and manual top-ups do not expire; monthly
+  allocation credits expire monthly. Because the core framework is open source
+  (SSPL-1.0), teams can self-host to shift some browser/agent compute off the
+  managed bill and pay Notte only for managed capacity they actually use.
+notes: >-
+  Per-tier prices and usage rates are subject to change; verify against the
+  Notte pricing page during reconciliation.
+sources:
+- https://notte.cc/pricing
+- https://docs.notte.cc
+- https://github.com/nottelabs/notte
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Notte
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Notte
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Notte
+  PublisherName: Notte
+  InvoiceIssuerName: Notte
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: subscription_fee
+  description: Monthly subscription per tier (Developer $20, Startup $100), which grants the credit allowance.
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: session_hours
+  description: Cloud browser session compute, billed against credits at $0.05/hour.
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - account
+  - session
+- name: function_hours
+  description: Serverless browser function compute, billed against credits at $0.05/hour.
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - account
+  - function
+- name: proxy_gigabytes
+  description: Residential proxy bandwidth, billed against credits at $10/GB.
+  unit: gigabytes
+  aggregation: sum
+  dimensions:
+  - account
+  - session
+- name: llm_tokens
+  description: LLM tokens consumed by agents, billed at pass-through cost with no markup.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: credits_consumed
+  description: Aggregate credit balance drawn down across sessions, functions, proxies, and LLM tokens.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - account
+- name: credit_topups
+  description: Non-expiring credits purchased via manual top-up.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Pull Notte usage and usage-logs endpoints (/usage, /usage/logs) to inspect credit burn by session, function, proxy, and LLM tokens.
+- name: Allocation
+  description: Tag API keys, sessions, and functions per workload/team; map credit consumption to internal cost centers.
+- name: Optimization
+  description: Cap max_session and max_steps; reuse sessions; prefer headless; self-host the open-source framework where viable; choose cheaper reasoning models given pass-through LLM pricing; right-size the subscription tier to monthly credit usage.
+- name: Accountability
+  description: Assign owners per project/key; review monthly credit spend against the plan allowance before allocation credits expire.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

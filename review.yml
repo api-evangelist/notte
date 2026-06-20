@@ -1,0 +1,123 @@
+aid: notte
+name: Notte
+review:
+  question: Does Notte expose a documented public WebSocket / streaming event API that warrants an AsyncAPI document?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No Notte-authored asynchronous event API (WebSocket message streams,
+    Server-Sent Events, or webhooks pushed by Notte) is documented as part of
+    the api.notte.cc REST surface. Agent and session progress are retrieved by
+    polling REST status endpoints, not by subscribing to an event stream.
+    Therefore no AsyncAPI document was created. A WebSocket transport does
+    exist, but it is the standard Chrome DevTools Protocol (CDP) endpoint of the
+    remote browser (surfaced as cdp_url / ws_url for Playwright, Puppeteer,
+    Selenium, browser-use, and Stagehand to connect to). CDP is a third-party
+    browser-control protocol, not a Notte application event API, so it is out of
+    scope for AsyncAPI modeling.
+findings:
+  summary: |
+    Notte publishes a documented public REST API at https://api.notte.cc with
+    Bearer (API key) authentication and a machine-generated OpenAPI document at
+    https://api.notte.cc/openapi.json (OpenAPI 3.1.0, title "Notte API"). The
+    surface covers sessions, the perception layer (page observe / execute /
+    scrape / screenshot), autonomous agents, one-shot scraping and AI web
+    search, personas, vaults, profiles, secrets, file storage, and serverless
+    functions. Asynchronous work (agent runs, session lifetime) is observed by
+    polling REST status endpoints (GET /agents/{agent_id}, GET
+    /sessions/{session_id}). The only WebSocket surface is the remote browser's
+    Chrome DevTools Protocol endpoint (cdp_url / ws_url from
+    /sessions/{session_id}/debug), used by external automation frameworks to
+    drive the browser - it is not a Notte event API. Session replay is delivered
+    as a downloadable WEBP, and a live viewer URL streams the browser visually;
+    neither is a structured application event API. The core framework is open
+    source under SSPL-1.0.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.notte.cc
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: true
+      note: >-
+        Chrome DevTools Protocol (CDP) endpoint of the remote browser, surfaced
+        as cdp_url / ws_url via /sessions/{session_id}/debug for external
+        frameworks (Playwright, Puppeteer, Selenium, browser-use) to connect to.
+        This is a browser-control protocol, not a Notte-authored event API, so
+        no AsyncAPI document was modeled for it.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events stream is documented for the Notte REST API; agent/session progress is polled.
+    - protocol: Webhooks
+      scheme: https
+      documented: false
+      note: >-
+        No outbound Notte-pushed webhook catalog is documented. A notifier_config
+        on agent runs can send notifications, but no public webhook event schema
+        is published.
+  endpointsConfirmedRest:
+    - POST   https://api.notte.cc/sessions/start
+    - GET    https://api.notte.cc/sessions
+    - GET    https://api.notte.cc/sessions/{session_id}
+    - DELETE https://api.notte.cc/sessions/{session_id}/stop
+    - GET    https://api.notte.cc/sessions/{session_id}/debug
+    - GET    https://api.notte.cc/sessions/{session_id}/replay
+    - GET    https://api.notte.cc/sessions/{session_id}/cookies
+    - POST   https://api.notte.cc/sessions/{session_id}/cookies
+    - POST   https://api.notte.cc/sessions/{session_id}/page/observe
+    - POST   https://api.notte.cc/sessions/{session_id}/page/execute
+    - POST   https://api.notte.cc/sessions/{session_id}/page/scrape
+    - POST   https://api.notte.cc/sessions/{session_id}/page/screenshot
+    - POST   https://api.notte.cc/agents/start
+    - GET    https://api.notte.cc/agents
+    - GET    https://api.notte.cc/agents/{agent_id}
+    - DELETE https://api.notte.cc/agents/{agent_id}/stop
+    - GET    https://api.notte.cc/agents/{agent_id}/workflow/code
+    - POST   https://api.notte.cc/scrape
+    - POST   https://api.notte.cc/scrape_from_html
+    - POST   https://api.notte.cc/search
+    - POST   https://api.notte.cc/personas/create
+    - GET    https://api.notte.cc/personas
+    - GET    https://api.notte.cc/personas/{persona_id}
+    - DELETE https://api.notte.cc/personas/{persona_id}
+    - GET    https://api.notte.cc/personas/{persona_id}/emails
+    - GET    https://api.notte.cc/personas/{persona_id}/sms
+    - POST   https://api.notte.cc/vaults/create
+    - GET    https://api.notte.cc/vaults
+    - DELETE https://api.notte.cc/vaults/{vault_id}
+    - GET    https://api.notte.cc/vaults/{vault_id}/credentials
+    - POST   https://api.notte.cc/vaults/{vault_id}/credentials
+    - DELETE https://api.notte.cc/vaults/{vault_id}/credentials
+    - GET    https://api.notte.cc/health
+sources:
+  - url: https://api.notte.cc/openapi.json
+    type: OpenAPI
+    note: Machine-generated OpenAPI 3.1.0; all paths are HTTPS REST under https://api.notte.cc.
+  - url: https://docs.notte.cc/api-reference/authentication
+    type: APIReference
+    note: Bearer API key in Authorization header; base URL https://api.notte.cc.
+  - url: https://docs.notte.cc/llms.txt
+    type: Documentation
+    note: Full documentation map of API and SDK reference pages; no event/streaming API listed.
+  - url: https://docs.notte.cc/api-reference/sessions/session-debug-info
+    type: APIReference
+    note: Exposes cdp_url / ws_url (Chrome DevTools Protocol) and viewer URL for the remote browser.
+  - url: https://github.com/nottelabs/notte
+    type: GitHub
+    note: Open-source core framework (SSPL-1.0); confirms REST API at api.notte.cc with Bearer auth.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No Notte-authored asynchronous event API exists. The REST surface was
+    modeled in openapi/notte-openapi.yml and registered across five sub-APIs in
+    apis.yml. The CDP WebSocket transport is documented in this review as a
+    transport note rather than an AsyncAPI document, because it is the browser's
+    DevTools protocol rather than a Notte application event API.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

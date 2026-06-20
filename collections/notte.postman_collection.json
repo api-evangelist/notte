@@ -1,0 +1,1015 @@
+{
+  "item": [
+    {
+      "id": "64e09a76-a06e-4b58-b363-3894489a0e37",
+      "name": "Sessions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7887f2e1-9f35-4c87-adbd-fa2a856322a3",
+          "name": "Session Start",
+          "request": {
+            "name": "Session Start",
+            "url": {
+              "path": [
+                "sessions",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headless\": true,\n  \"solve_captchas\": false,\n  \"max_duration_minutes\": 15,\n  \"browser_type\": \"chromium\",\n  \"proxies\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "c28dbf41-ff6e-468c-a77e-3be87b32171d",
+          "name": "List Sessions",
+          "request": {
+            "name": "List Sessions",
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "531b811e-2c86-4286-9ca8-48ef0903acbf",
+          "name": "Session Status",
+          "request": {
+            "name": "Session Status",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "7fcd9052-c7e7-46bf-80c0-8777dcdd8b54",
+          "name": "Session Stop",
+          "request": {
+            "name": "Session Stop",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "16b86502-23d4-4121-9e1d-1e4e810dd2dc",
+          "name": "Session Debug Info",
+          "request": {
+            "name": "Session Debug Info",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "debug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "d70d6893-455f-4ee9-a153-ce17d792dbc1",
+          "name": "Session Replay",
+          "request": {
+            "name": "Session Replay",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "replay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "2e98968b-192a-4a9c-997a-828cd38ec90b",
+          "name": "Session Cookies Get",
+          "request": {
+            "name": "Session Cookies Get",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "cookies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "5d65d7ad-5235-42e5-af43-829e3edc21a8",
+          "name": "Session Cookies Set",
+          "request": {
+            "name": "Session Cookies Set",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "cookies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cookies\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\",\n      \"domain\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "7a8e9d41-bbb7-4bd5-896f-ca02c700b61e",
+      "name": "Page",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a93836b5-26e3-4215-a921-5f55a6094429",
+          "name": "Page Observe",
+          "request": {
+            "name": "Page Observe",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "page",
+                "observe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instructions\": \"<string>\",\n  \"perception_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "879e3e92-fd1a-4195-a9fa-f5a4e7a13932",
+          "name": "Page Execute (Step)",
+          "request": {
+            "name": "Page Execute (Step)",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "page",
+                "execute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": {\n    \"type\": \"click\",\n    \"id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "666a2f72-93d1-4739-ba75-59addc708a78",
+          "name": "Page Scrape",
+          "request": {
+            "name": "Page Scrape",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "page",
+                "scrape"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"only_main_content\": true,\n  \"scrape_links\": false,\n  \"instructions\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "742225ce-6c66-4988-951d-6f552c9b87a3",
+          "name": "Page Screenshot",
+          "request": {
+            "name": "Page Screenshot",
+            "url": {
+              "path": [
+                "sessions",
+                "{session_id}",
+                "page",
+                "screenshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "18a0910d-c95f-428c-99de-d88ff008c055",
+      "name": "Agents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7cee2436-2e0f-42b7-8dcc-c56d34a90f08",
+          "name": "Agent Start",
+          "request": {
+            "name": "Agent Start",
+            "url": {
+              "path": [
+                "agents",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"max_steps\": 20,\n  \"use_vision\": true,\n  \"reasoning_model\": \"vertex_ai/gemini-2.5-flash\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "c336b067-e6e3-4002-9d33-a4fcc3fc636b",
+          "name": "List Agents",
+          "request": {
+            "name": "List Agents",
+            "url": {
+              "path": [
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "1599658d-5fea-42d4-88fb-a61a1b78778f",
+          "name": "Agent Status",
+          "request": {
+            "name": "Agent Status",
+            "url": {
+              "path": [
+                "agents",
+                "{agent_id}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "21e62721-9868-48a3-8260-03333bc3c758",
+          "name": "Agent Stop",
+          "request": {
+            "name": "Agent Stop",
+            "url": {
+              "path": [
+                "agents",
+                "{agent_id}",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "f8874194-2de8-42d7-bb4f-e0c42c4c2de5",
+          "name": "Get Script",
+          "request": {
+            "name": "Get Script",
+            "url": {
+              "path": [
+                "agents",
+                "{agent_id}",
+                "workflow",
+                "code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "d22f7eb3-1b68-4766-9510-f8d56473b222",
+      "name": "Scraping",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ce63488-a79e-4156-830f-f8952bc25667",
+          "name": "Scrape Webpage",
+          "request": {
+            "name": "Scrape Webpage",
+            "url": {
+              "path": [
+                "scrape"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com\",\n  \"only_main_content\": true,\n  \"scrape_links\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "5bde2262-42d3-4220-842c-3c4730b623b5",
+          "name": "Scrape From HTML",
+          "request": {
+            "name": "Scrape From HTML",
+            "url": {
+              "path": [
+                "scrape_from_html"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"frames\": [\n    {\n      \"html\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ],\n  \"only_main_content\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "4426618e-02a8-4203-a34e-be9ae33866c0",
+          "name": "Search Web",
+          "request": {
+            "name": "Search Web",
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"q\": \"<string>\",\n  \"depth\": \"<string>\",\n  \"outputType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "6a3f8258-7f75-4bb0-8f60-8298528abf93",
+      "name": "Personas",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b114296-c537-4619-9798-3f16f8663510",
+          "name": "Persona Create",
+          "request": {
+            "name": "Persona Create",
+            "url": {
+              "path": [
+                "personas",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"create_vault\": false,\n  \"create_phone_number\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "866458da-c40e-4aa2-91b2-62168e456aa8",
+          "name": "List Personas",
+          "request": {
+            "name": "List Personas",
+            "url": {
+              "path": [
+                "personas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "776f6534-2eec-4a87-bd79-ee8df9891ca7",
+          "name": "Persona Get",
+          "request": {
+            "name": "Persona Get",
+            "url": {
+              "path": [
+                "personas",
+                "{persona_id}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "d8b22b1c-a124-43c6-8969-8fa9435bc42d",
+          "name": "Persona Delete",
+          "request": {
+            "name": "Persona Delete",
+            "url": {
+              "path": [
+                "personas",
+                "{persona_id}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "a600a022-76bb-41ea-a411-a74c2281a3c0",
+          "name": "Persona Emails List",
+          "request": {
+            "name": "Persona Emails List",
+            "url": {
+              "path": [
+                "personas",
+                "{persona_id}",
+                "emails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "5a180089-6208-4295-a3b7-b2b96e8b1449",
+          "name": "Persona SMS List",
+          "request": {
+            "name": "Persona SMS List",
+            "url": {
+              "path": [
+                "personas",
+                "{persona_id}",
+                "sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "02bbf004-37bc-4a82-995e-491e74a804be",
+      "name": "Vaults",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9173593b-c659-4e7d-83b7-0ab886526908",
+          "name": "Vault Create",
+          "request": {
+            "name": "Vault Create",
+            "url": {
+              "path": [
+                "vaults",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "1e607ecf-e63c-4165-9ee9-b6dfd427b1ae",
+          "name": "List Vaults",
+          "request": {
+            "name": "List Vaults",
+            "url": {
+              "path": [
+                "vaults"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "1ac9c9cb-96f1-4adb-a949-395f08ce8eb1",
+          "name": "Vault Delete",
+          "request": {
+            "name": "Vault Delete",
+            "url": {
+              "path": [
+                "vaults",
+                "{vault_id}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "595a1d9a-73bb-487d-bedf-73ae5bdb40c1",
+          "name": "Vault Credentials Get",
+          "request": {
+            "name": "Vault Credentials Get",
+            "url": {
+              "path": [
+                "vaults",
+                "{vault_id}",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "id": "05a0ab1e-9288-4416-aed2-6d28fd33bb5d",
+          "name": "Vault Credentials Add",
+          "request": {
+            "name": "Vault Credentials Add",
+            "url": {
+              "path": [
+                "vaults",
+                "{vault_id}",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "9625be50-c01e-4922-ab33-d750f4fd1ea9",
+          "name": "Vault Credentials Delete",
+          "request": {
+            "name": "Vault Credentials Delete",
+            "url": {
+              "path": [
+                "vaults",
+                "{vault_id}",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "9cc79985-cfa9-48fd-a765-8af3e76c0fb9",
+      "name": "Health",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac051a8f-e85b-4dac-af14-9c7779205656",
+          "name": "Health Check",
+          "request": {
+            "name": "Health Check",
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "info": {
+    "_postman_id": "1f71eca7-d85a-436f-a81d-c57598b222ea",
+    "name": "Notte API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Notte web browser and agent infrastructure for AI REST API.",
+      "type": "text/plain"
+    }
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.notte.cc"
+    },
+    {
+      "key": "bearerToken",
+      "value": "NOTTE_API_KEY"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  }
+}

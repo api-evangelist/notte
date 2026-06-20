@@ -1,0 +1,482 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Notte API",
+    "version": "1.4.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Session Start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/start",
+            "body": {
+              "type": "json",
+              "data": "{\"headless\": true, \"solve_captchas\": false, \"max_duration_minutes\": 15, \"browser_type\": \"chromium\", \"proxies\": false}"
+            }
+          },
+          "docs": "Session Start"
+        },
+        {
+          "info": {
+            "name": "List Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions"
+          },
+          "docs": "List Sessions"
+        },
+        {
+          "info": {
+            "name": "Session Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions/{session_id}"
+          },
+          "docs": "Session Status"
+        },
+        {
+          "info": {
+            "name": "Session Stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/sessions/{session_id}/stop"
+          },
+          "docs": "Session Stop"
+        },
+        {
+          "info": {
+            "name": "Session Debug Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions/{session_id}/debug"
+          },
+          "docs": "Session Debug Info"
+        },
+        {
+          "info": {
+            "name": "Session Replay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions/{session_id}/replay"
+          },
+          "docs": "Session Replay"
+        },
+        {
+          "info": {
+            "name": "Session Cookies Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions/{session_id}/cookies"
+          },
+          "docs": "Session Cookies Get"
+        },
+        {
+          "info": {
+            "name": "Session Cookies Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/{session_id}/cookies",
+            "body": {
+              "type": "json",
+              "data": "{\"cookies\": [{\"name\": \"<string>\", \"value\": \"<string>\", \"domain\": \"<string>\"}]}"
+            }
+          },
+          "docs": "Session Cookies Set"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Page",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Page Observe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/{session_id}/page/observe",
+            "body": {
+              "type": "json",
+              "data": "{\"instructions\": \"<string>\", \"perception_type\": \"<string>\"}"
+            }
+          },
+          "docs": "Page Observe"
+        },
+        {
+          "info": {
+            "name": "Page Execute (Step)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/{session_id}/page/execute",
+            "body": {
+              "type": "json",
+              "data": "{\"action\": {\"type\": \"click\", \"id\": \"<string>\"}}"
+            }
+          },
+          "docs": "Page Execute (Step)"
+        },
+        {
+          "info": {
+            "name": "Page Scrape",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/{session_id}/page/scrape",
+            "body": {
+              "type": "json",
+              "data": "{\"only_main_content\": true, \"scrape_links\": false, \"instructions\": \"<string>\"}"
+            }
+          },
+          "docs": "Page Scrape"
+        },
+        {
+          "info": {
+            "name": "Page Screenshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/{session_id}/page/screenshot"
+          },
+          "docs": "Page Screenshot"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agent Start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/agents/start",
+            "body": {
+              "type": "json",
+              "data": "{\"task\": \"<string>\", \"session_id\": \"<string>\", \"max_steps\": 20, \"use_vision\": true, \"reasoning_model\": \"vertex_ai/gemini-2.5-flash\"}"
+            }
+          },
+          "docs": "Agent Start"
+        },
+        {
+          "info": {
+            "name": "List Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/agents"
+          },
+          "docs": "List Agents"
+        },
+        {
+          "info": {
+            "name": "Agent Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/agents/{agent_id}"
+          },
+          "docs": "Agent Status"
+        },
+        {
+          "info": {
+            "name": "Agent Stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/agents/{agent_id}/stop"
+          },
+          "docs": "Agent Stop"
+        },
+        {
+          "info": {
+            "name": "Get Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/agents/{agent_id}/workflow/code"
+          },
+          "docs": "Get Script"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Scraping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Scrape Webpage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/scrape",
+            "body": {
+              "type": "json",
+              "data": "{\"url\": \"https://example.com\", \"only_main_content\": true, \"scrape_links\": false}"
+            }
+          },
+          "docs": "Scrape Webpage"
+        },
+        {
+          "info": {
+            "name": "Scrape From HTML",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/scrape_from_html",
+            "body": {
+              "type": "json",
+              "data": "{\"frames\": [{\"html\": \"<string>\", \"url\": \"<string>\"}], \"only_main_content\": true}"
+            }
+          },
+          "docs": "Scrape From HTML"
+        },
+        {
+          "info": {
+            "name": "Search Web",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/search",
+            "body": {
+              "type": "json",
+              "data": "{\"q\": \"<string>\", \"depth\": \"<string>\", \"outputType\": \"<string>\"}"
+            }
+          },
+          "docs": "Search Web"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Personas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Persona Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/personas/create",
+            "body": {
+              "type": "json",
+              "data": "{\"create_vault\": false, \"create_phone_number\": false}"
+            }
+          },
+          "docs": "Persona Create"
+        },
+        {
+          "info": {
+            "name": "List Personas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/personas"
+          },
+          "docs": "List Personas"
+        },
+        {
+          "info": {
+            "name": "Persona Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/personas/{persona_id}"
+          },
+          "docs": "Persona Get"
+        },
+        {
+          "info": {
+            "name": "Persona Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/personas/{persona_id}"
+          },
+          "docs": "Persona Delete"
+        },
+        {
+          "info": {
+            "name": "Persona Emails List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/personas/{persona_id}/emails"
+          },
+          "docs": "Persona Emails List"
+        },
+        {
+          "info": {
+            "name": "Persona SMS List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/personas/{persona_id}/sms"
+          },
+          "docs": "Persona SMS List"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Vaults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vault Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/vaults/create",
+            "body": {
+              "type": "json",
+              "data": "{\"name\": \"<string>\"}"
+            }
+          },
+          "docs": "Vault Create"
+        },
+        {
+          "info": {
+            "name": "List Vaults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/vaults"
+          },
+          "docs": "List Vaults"
+        },
+        {
+          "info": {
+            "name": "Vault Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/vaults/{vault_id}"
+          },
+          "docs": "Vault Delete"
+        },
+        {
+          "info": {
+            "name": "Vault Credentials Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/vaults/{vault_id}/credentials"
+          },
+          "docs": "Vault Credentials Get"
+        },
+        {
+          "info": {
+            "name": "Vault Credentials Add",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/vaults/{vault_id}/credentials",
+            "body": {
+              "type": "json",
+              "data": "{\"url\": \"https://example.com\", \"username\": \"<string>\", \"password\": \"<string>\"}"
+            }
+          },
+          "docs": "Vault Credentials Add"
+        },
+        {
+          "info": {
+            "name": "Vault Credentials Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/vaults/{vault_id}/credentials"
+          },
+          "docs": "Vault Credentials Delete"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/health"
+          },
+          "docs": "Health Check"
+        }
+      ]
+    }
+  ]
+}
