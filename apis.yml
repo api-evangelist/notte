@@ -145,6 +145,10 @@ apis:
     numbers, and automated 2FA for account workflows. Vaults securely store credentials
     and credit cards that are injected into agent and session runs.
 common:
+- type: DomainSecurity
+  url: security/notte-domain-security.yml
+- type: Authentication
+  url: authentication/notte-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/nottelabs
 - type: LinkedIn
