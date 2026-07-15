@@ -145,6 +145,8 @@ apis:
     numbers, and automated 2FA for account workflows. Vaults securely store credentials
     and credit cards that are injected into agent and session runs.
 common:
+- type: AgenticAccess
+  url: agentic-access/notte-agentic-access.yml
 - type: DomainSecurity
   url: security/notte-domain-security.yml
 - type: Authentication
