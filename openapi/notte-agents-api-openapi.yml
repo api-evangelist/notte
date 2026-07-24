@@ -1,0 +1,224 @@
+openapi: 3.0.1
+info:
+  title: Notte Agents API
+  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  termsOfService: https://notte.cc/terms
+  contact:
+    name: Notte
+    url: https://notte.cc
+  license:
+    name: Server Side Public License v1 (SSPL-1.0)
+    url: https://www.mongodb.com/licensing/server-side-public-license
+  version: 1.4.40
+servers:
+- url: https://api.notte.cc
+security:
+- BearerAuth: []
+tags:
+- name: Agents
+  description: Run autonomous web agents from natural-language tasks.
+paths:
+  /agents/start:
+    post:
+      operationId: agentStart
+      tags:
+      - Agents
+      summary: Agent Start
+      description: Starts an autonomous web agent that performs a natural-language task on a browser session.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentStartRequest'
+      responses:
+        '200':
+          description: The started agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentResponse'
+  /agents:
+    get:
+      operationId: listAgents
+      tags:
+      - Agents
+      summary: List Agents
+      description: Lists agents for the authenticated account.
+      parameters:
+      - name: only_active
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: A list of agents.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgentResponse'
+  /agents/{agent_id}:
+    get:
+      operationId: agentStatus
+      tags:
+      - Agents
+      summary: Agent Status
+      description: Returns the status and result of an agent run.
+      parameters:
+      - $ref: '#/components/parameters/AgentId'
+      responses:
+        '200':
+          description: The agent status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentStatusResponse'
+  /agents/{agent_id}/stop:
+    delete:
+      operationId: agentStop
+      tags:
+      - Agents
+      summary: Agent Stop
+      description: Stops a running agent.
+      parameters:
+      - $ref: '#/components/parameters/AgentId'
+      responses:
+        '200':
+          description: The stopped agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentResponse'
+  /agents/{agent_id}/workflow/code:
+    get:
+      operationId: getScript
+      tags:
+      - Agents
+      summary: Get Script
+      description: Returns the reproducible workflow script generated from an agent run.
+      parameters:
+      - $ref: '#/components/parameters/AgentId'
+      responses:
+        '200':
+          description: The generated workflow code.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+components:
+  schemas:
+    AgentResponse:
+      type: object
+      properties:
+        agent_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - closed
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        saved:
+          type: boolean
+          default: false
+    AgentStartRequest:
+      type: object
+      required:
+      - task
+      - session_id
+      properties:
+        task:
+          type: string
+          description: The task that the agent should perform.
+        session_id:
+          type: string
+          description: The ID of the session to run the agent on.
+        url:
+          type: string
+          nullable: true
+          description: Optional starting URL for the agent.
+        response_format:
+          type: object
+          nullable: true
+          description: Desired response schema for structured agent output.
+        session_offset:
+          type: integer
+          nullable: true
+          description: Step from which to gather information.
+        reasoning_model:
+          type: string
+          default: vertex_ai/gemini-2.5-flash
+          description: The reasoning model to use.
+        use_vision:
+          type: boolean
+          default: true
+        max_steps:
+          type: integer
+          default: 20
+          minimum: 1
+          maximum: 150
+        vault_id:
+          type: string
+          nullable: true
+        persona_id:
+          type: string
+          nullable: true
+        notifier_config:
+          type: object
+          nullable: true
+    AgentStatusResponse:
+      allOf:
+      - $ref: '#/components/schemas/AgentResponse'
+      - type: object
+        properties:
+          task:
+            type: string
+          success:
+            type: boolean
+            nullable: true
+          answer:
+            type: string
+            nullable: true
+          steps:
+            type: array
+            items:
+              type: object
+  parameters:
+    AgentId:
+      name: agent_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Notte API key obtained from the Notte Console (https://console.notte.cc), passed as a Bearer token in the Authorization header. The SDK reads the NOTTE_API_KEY environment variable automatically.

@@ -1,0 +1,204 @@
+openapi: 3.0.1
+info:
+  title: Notte Agents Scraping API
+  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  termsOfService: https://notte.cc/terms
+  contact:
+    name: Notte
+    url: https://notte.cc
+  license:
+    name: Server Side Public License v1 (SSPL-1.0)
+    url: https://www.mongodb.com/licensing/server-side-public-license
+  version: 1.4.40
+servers:
+- url: https://api.notte.cc
+security:
+- BearerAuth: []
+tags:
+- name: Scraping
+  description: One-shot scraping of a URL or raw HTML, plus AI web search.
+paths:
+  /scrape:
+    post:
+      operationId: scrapeWebpage
+      tags:
+      - Scraping
+      summary: Scrape Webpage
+      description: One-shot scrape of a URL. Returns main content, links, images, or AI-extracted structured data against an optional response format.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalScrapeRequest'
+      responses:
+        '200':
+          description: The scraped content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScrapeResponse'
+  /scrape_from_html:
+    post:
+      operationId: scrapeFromHtml
+      tags:
+      - Scraping
+      summary: Scrape From HTML
+      description: Scrapes structured content from a supplied raw HTML payload.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScrapeFromHtmlRequest'
+      responses:
+        '200':
+          description: The scraped content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScrapeResponse'
+  /search:
+    post:
+      operationId: searchWeb
+      tags:
+      - Scraping
+      summary: Search Web
+      description: Runs an AI web search and returns results.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: The search results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+components:
+  schemas:
+    GlobalScrapeRequest:
+      allOf:
+      - $ref: '#/components/schemas/ScrapeRequest'
+      - type: object
+        required:
+        - url
+        properties:
+          url:
+            type: string
+            description: The URL to scrape.
+          headless:
+            type: boolean
+            default: true
+          solve_captchas:
+            type: boolean
+            default: false
+          proxies:
+            oneOf:
+            - type: boolean
+            - type: array
+              items:
+                type: object
+          browser_type:
+            type: string
+            default: chromium
+    ScrapeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        content:
+          type: string
+          nullable: true
+          description: The extracted main content (markdown).
+        structured:
+          type: object
+          nullable: true
+          description: AI-extracted structured data matching the response_format.
+        links:
+          type: array
+          items:
+            type: string
+          nullable: true
+        images:
+          type: array
+          items:
+            type: string
+          nullable: true
+    ScrapeFromHtmlRequest:
+      allOf:
+      - $ref: '#/components/schemas/ScrapeRequest'
+      - type: object
+        properties:
+          frames:
+            type: array
+            description: One or more HTML frames to scrape.
+            items:
+              type: object
+              properties:
+                html:
+                  type: string
+                url:
+                  type: string
+    SearchRequest:
+      type: object
+      required:
+      - q
+      properties:
+        q:
+          type: string
+          description: The search query.
+        depth:
+          type: string
+          description: Search depth.
+        outputType:
+          type: string
+          description: Desired output type.
+    ScrapeRequest:
+      type: object
+      properties:
+        selector:
+          type: string
+          nullable: true
+          description: Optional CSS selector to scope extraction.
+        scrape_links:
+          type: boolean
+          default: false
+        scrape_images:
+          type: boolean
+          default: false
+        ignored_tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        only_main_content:
+          type: boolean
+          default: true
+        only_images:
+          type: boolean
+          default: false
+        response_format:
+          type: object
+          nullable: true
+          description: A JSON schema (e.g. derived from a Pydantic model) for AI-structured extraction.
+        instructions:
+          type: string
+          nullable: true
+          description: Natural-language extraction instructions.
+        use_link_placeholders:
+          type: boolean
+          default: false
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Notte API key obtained from the Notte Console (https://console.notte.cc), passed as a Bearer token in the Authorization header. The SDK reads the NOTTE_API_KEY environment variable automatically.

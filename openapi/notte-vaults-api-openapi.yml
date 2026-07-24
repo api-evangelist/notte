@@ -1,0 +1,190 @@
+openapi: 3.0.1
+info:
+  title: Notte Agents Vaults API
+  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  termsOfService: https://notte.cc/terms
+  contact:
+    name: Notte
+    url: https://notte.cc
+  license:
+    name: Server Side Public License v1 (SSPL-1.0)
+    url: https://www.mongodb.com/licensing/server-side-public-license
+  version: 1.4.40
+servers:
+- url: https://api.notte.cc
+security:
+- BearerAuth: []
+tags:
+- name: Vaults
+  description: Secure credential and credit-card storage injected into runs.
+paths:
+  /vaults/create:
+    post:
+      operationId: vaultCreate
+      tags:
+      - Vaults
+      summary: Vault Create
+      description: Creates a secure vault for storing credentials and credit cards.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VaultCreateRequest'
+      responses:
+        '200':
+          description: The created vault.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vault'
+  /vaults:
+    get:
+      operationId: listVaults
+      tags:
+      - Vaults
+      summary: List Vaults
+      description: Lists vaults for the authenticated account.
+      responses:
+        '200':
+          description: A paginated list of vaults.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vault'
+  /vaults/{vault_id}:
+    delete:
+      operationId: vaultDelete
+      tags:
+      - Vaults
+      summary: Vault Delete
+      description: Deletes a vault.
+      parameters:
+      - $ref: '#/components/parameters/VaultId'
+      responses:
+        '200':
+          description: The deleted vault.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vault_id:
+                    type: string
+                  status:
+                    type: string
+  /vaults/{vault_id}/credentials:
+    get:
+      operationId: vaultCredentialsGet
+      tags:
+      - Vaults
+      summary: Vault Credentials Get
+      description: Returns stored credentials for a vault.
+      parameters:
+      - $ref: '#/components/parameters/VaultId'
+      - name: url
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
+    post:
+      operationId: vaultCredentialsAdd
+      tags:
+      - Vaults
+      summary: Vault Credentials Add
+      description: Adds credentials to a vault.
+      parameters:
+      - $ref: '#/components/parameters/VaultId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credential'
+      responses:
+        '200':
+          description: The added credential.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
+    delete:
+      operationId: vaultCredentialsDelete
+      tags:
+      - Vaults
+      summary: Vault Credentials Delete
+      description: Deletes credentials from a vault.
+      parameters:
+      - $ref: '#/components/parameters/VaultId'
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deletion result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+components:
+  schemas:
+    Vault:
+      type: object
+      properties:
+        vault_id:
+          type: string
+        name:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    VaultCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The vault name.
+    Credential:
+      type: object
+      properties:
+        url:
+          type: string
+        username:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+        mfa_secret:
+          type: string
+          nullable: true
+  parameters:
+    VaultId:
+      name: vault_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Notte API key obtained from the Notte Console (https://console.notte.cc), passed as a Bearer token in the Authorization header. The SDK reads the NOTTE_API_KEY environment variable automatically.

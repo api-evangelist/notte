@@ -1,0 +1,252 @@
+openapi: 3.0.1
+info:
+  title: Notte Agents Page API
+  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  termsOfService: https://notte.cc/terms
+  contact:
+    name: Notte
+    url: https://notte.cc
+  license:
+    name: Server Side Public License v1 (SSPL-1.0)
+    url: https://www.mongodb.com/licensing/server-side-public-license
+  version: 1.4.40
+servers:
+- url: https://api.notte.cc
+security:
+- BearerAuth: []
+tags:
+- name: Page
+  description: Perception layer - observe, step (execute), and scrape a live session page.
+paths:
+  /sessions/{session_id}/page/observe:
+    post:
+      operationId: pageObserve
+      tags:
+      - Page
+      summary: Page Observe
+      description: Runs Notte's perception layer on the current page and returns the set of available actions a model or human can take next.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObserveRequest'
+      responses:
+        '200':
+          description: The observation including available actions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObserveResponse'
+  /sessions/{session_id}/page/execute:
+    post:
+      operationId: pageExecute
+      tags:
+      - Page
+      summary: Page Execute (Step)
+      description: Executes a single action (a step) on the current page, such as click, fill, scroll, navigate, select, upload, or wait.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StepRequest'
+      responses:
+        '200':
+          description: The result of the executed action.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepResponse'
+  /sessions/{session_id}/page/scrape:
+    post:
+      operationId: pageScrape
+      tags:
+      - Page
+      summary: Page Scrape
+      description: Scrapes structured content from the current page of a session.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScrapeRequest'
+      responses:
+        '200':
+          description: The scraped content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScrapeResponse'
+  /sessions/{session_id}/page/screenshot:
+    post:
+      operationId: pageScreenshot
+      tags:
+      - Page
+      summary: Page Screenshot
+      description: Captures a screenshot of the current page.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: The screenshot image.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    ObserveRequest:
+      type: object
+      properties:
+        min_nb_actions:
+          type: integer
+          nullable: true
+          description: Minimum number of actions to surface.
+        max_nb_actions:
+          type: integer
+          nullable: true
+          description: Maximum number of actions to surface.
+        instructions:
+          type: string
+          nullable: true
+          description: Natural-language guidance for what to look for on the page.
+        perception_type:
+          type: string
+          nullable: true
+          description: Perception strategy to apply.
+    ScrapeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        content:
+          type: string
+          nullable: true
+          description: The extracted main content (markdown).
+        structured:
+          type: object
+          nullable: true
+          description: AI-extracted structured data matching the response_format.
+        links:
+          type: array
+          items:
+            type: string
+          nullable: true
+        images:
+          type: array
+          items:
+            type: string
+          nullable: true
+    StepResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        success:
+          type: boolean
+        message:
+          type: string
+          nullable: true
+    ObserveResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+        screenshot:
+          type: string
+          nullable: true
+        space:
+          type: object
+          description: The action space - the set of available actions on the page.
+          properties:
+            actions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Action'
+    StepRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          $ref: '#/components/schemas/Action'
+    ScrapeRequest:
+      type: object
+      properties:
+        selector:
+          type: string
+          nullable: true
+          description: Optional CSS selector to scope extraction.
+        scrape_links:
+          type: boolean
+          default: false
+        scrape_images:
+          type: boolean
+          default: false
+        ignored_tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        only_main_content:
+          type: boolean
+          default: true
+        only_images:
+          type: boolean
+          default: false
+        response_format:
+          type: object
+          nullable: true
+          description: A JSON schema (e.g. derived from a Pydantic model) for AI-structured extraction.
+        instructions:
+          type: string
+          nullable: true
+          description: Natural-language extraction instructions.
+        use_link_placeholders:
+          type: boolean
+          default: false
+    Action:
+      type: object
+      description: A single browser action. Examples include click, fill, check, scroll, goto, go_back, go_forward, reload, wait, press_key, select_dropdown_option, upload_file, download_file, scrape, and captcha_solve.
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          example: click
+        id:
+          type: string
+          description: The action identifier returned by observe.
+          nullable: true
+        value:
+          type: string
+          description: The value for fill / select / press_key style actions.
+          nullable: true
+        url:
+          type: string
+          description: The target URL for a goto action.
+          nullable: true
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Notte API key obtained from the Notte Console (https://console.notte.cc), passed as a Bearer token in the Authorization header. The SDK reads the NOTTE_API_KEY environment variable automatically.

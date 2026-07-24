@@ -1,0 +1,170 @@
+openapi: 3.0.1
+info:
+  title: Notte Agents Personas API
+  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  termsOfService: https://notte.cc/terms
+  contact:
+    name: Notte
+    url: https://notte.cc
+  license:
+    name: Server Side Public License v1 (SSPL-1.0)
+    url: https://www.mongodb.com/licensing/server-side-public-license
+  version: 1.4.40
+servers:
+- url: https://api.notte.cc
+security:
+- BearerAuth: []
+tags:
+- name: Personas
+  description: Disposable digital identities with email, phone, and 2FA.
+paths:
+  /personas/create:
+    post:
+      operationId: personaCreate
+      tags:
+      - Personas
+      summary: Persona Create
+      description: Creates a disposable digital identity, optionally with a phone number and a dedicated vault, for account-creation and authentication workflows.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonaCreateRequest'
+      responses:
+        '200':
+          description: The created persona.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonaResponse'
+  /personas:
+    get:
+      operationId: listPersonas
+      tags:
+      - Personas
+      summary: List Personas
+      description: Lists personas for the authenticated account.
+      responses:
+        '200':
+          description: A paginated list of personas.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonaResponse'
+  /personas/{persona_id}:
+    get:
+      operationId: personaGet
+      tags:
+      - Personas
+      summary: Persona Get
+      description: Returns a persona by ID.
+      parameters:
+      - $ref: '#/components/parameters/PersonaId'
+      responses:
+        '200':
+          description: The persona.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonaResponse'
+    delete:
+      operationId: personaDelete
+      tags:
+      - Personas
+      summary: Persona Delete
+      description: Deletes a persona.
+      parameters:
+      - $ref: '#/components/parameters/PersonaId'
+      responses:
+        '200':
+          description: The deleted persona.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  persona_id:
+                    type: string
+                  status:
+                    type: string
+  /personas/{persona_id}/emails:
+    get:
+      operationId: personaEmailsList
+      tags:
+      - Personas
+      summary: Persona Emails List
+      description: Lists emails received by the persona inbox.
+      parameters:
+      - $ref: '#/components/parameters/PersonaId'
+      responses:
+        '200':
+          description: A list of emails.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /personas/{persona_id}/sms:
+    get:
+      operationId: personaSmsList
+      tags:
+      - Personas
+      summary: Persona SMS List
+      description: Lists SMS messages received by the persona phone number.
+      parameters:
+      - $ref: '#/components/parameters/PersonaId'
+      responses:
+        '200':
+          description: A list of SMS messages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+components:
+  parameters:
+    PersonaId:
+      name: persona_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    PersonaResponse:
+      type: object
+      properties:
+        persona_id:
+          type: string
+        email:
+          type: string
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+        vault_id:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    PersonaCreateRequest:
+      type: object
+      properties:
+        create_vault:
+          type: boolean
+          default: false
+          description: Whether to create a dedicated vault for the persona.
+        create_phone_number:
+          type: boolean
+          default: false
+          description: Whether to provision a phone number for the persona.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Notte API key obtained from the Notte Console (https://console.notte.cc), passed as a Bearer token in the Authorization header. The SDK reads the NOTTE_API_KEY environment variable automatically.

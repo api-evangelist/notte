@@ -1,0 +1,353 @@
+openapi: 3.0.1
+info:
+  title: Notte Agents Sessions API
+  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  termsOfService: https://notte.cc/terms
+  contact:
+    name: Notte
+    url: https://notte.cc
+  license:
+    name: Server Side Public License v1 (SSPL-1.0)
+    url: https://www.mongodb.com/licensing/server-side-public-license
+  version: 1.4.40
+servers:
+- url: https://api.notte.cc
+security:
+- BearerAuth: []
+tags:
+- name: Sessions
+  description: Create and manage remote cloud browser sessions.
+paths:
+  /sessions/start:
+    post:
+      operationId: sessionStart
+      tags:
+      - Sessions
+      summary: Session Start
+      description: Starts a remote cloud browser session.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionStartRequest'
+      responses:
+        '200':
+          description: The started session.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+  /sessions:
+    get:
+      operationId: listSessions
+      tags:
+      - Sessions
+      summary: List Sessions
+      description: Lists sessions for the authenticated account.
+      parameters:
+      - name: only_active
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: A paginated list of sessions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SessionResponse'
+  /sessions/{session_id}:
+    get:
+      operationId: sessionStatus
+      tags:
+      - Sessions
+      summary: Session Status
+      description: Returns the current status of a session.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: The session status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+  /sessions/{session_id}/stop:
+    delete:
+      operationId: sessionStop
+      tags:
+      - Sessions
+      summary: Session Stop
+      description: Stops and closes a running session.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: The closed session.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+  /sessions/{session_id}/debug:
+    get:
+      operationId: sessionDebugInfo
+      tags:
+      - Sessions
+      summary: Session Debug Info
+      description: Returns debug information including the live viewer and CDP URLs.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Debug information for the session.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ws_url:
+                    type: string
+                  cdp_url:
+                    type: string
+                  viewer_url:
+                    type: string
+  /sessions/{session_id}/replay:
+    get:
+      operationId: sessionReplay
+      tags:
+      - Sessions
+      summary: Session Replay
+      description: Returns a replay (WEBP) of the session.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Session replay binary.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /sessions/{session_id}/cookies:
+    get:
+      operationId: sessionCookiesGet
+      tags:
+      - Sessions
+      summary: Session Cookies Get
+      description: Returns the cookies for a session.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: The session cookies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CookiesResponse'
+    post:
+      operationId: sessionCookiesSet
+      tags:
+      - Sessions
+      summary: Session Cookies Set
+      description: Sets cookies on a session.
+      parameters:
+      - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetCookiesRequest'
+      responses:
+        '200':
+          description: Cookies set.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CookiesResponse'
+components:
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Cookie:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        domain:
+          type: string
+        path:
+          type: string
+        expires:
+          type: number
+        httpOnly:
+          type: boolean
+        secure:
+          type: boolean
+        sameSite:
+          type: string
+    SetCookiesRequest:
+      type: object
+      required:
+      - cookies
+      properties:
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+    SessionResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - closed
+          - error
+          - timed_out
+        created_at:
+          type: string
+          format: date-time
+        last_accessed_at:
+          type: string
+          format: date-time
+        idle_timeout_minutes:
+          type: integer
+        max_duration_minutes:
+          type: integer
+        browser_type:
+          type: string
+        user_agent:
+          type: string
+          nullable: true
+        viewport_width:
+          type: integer
+          nullable: true
+        viewport_height:
+          type: integer
+          nullable: true
+        network_request_bytes:
+          type: integer
+        network_response_bytes:
+          type: integer
+        viewer_url:
+          type: string
+          nullable: true
+        cdp_url:
+          type: string
+          nullable: true
+    SessionStartRequest:
+      type: object
+      properties:
+        headless:
+          type: boolean
+          default: true
+          description: Whether to run the session in headless mode.
+        solve_captchas:
+          type: boolean
+          default: false
+          description: Whether to automatically attempt to solve captchas.
+        max_duration_minutes:
+          type: integer
+          default: 15
+          maximum: 1440
+          description: Maximum session lifetime in minutes.
+        idle_timeout_minutes:
+          type: integer
+          default: 3
+          maximum: 15
+          description: Inactivity timeout in minutes.
+        proxies:
+          description: Proxy configuration (boolean to enable defaults or an array of proxy objects).
+          oneOf:
+          - type: boolean
+          - type: array
+            items:
+              type: object
+        browser_type:
+          type: string
+          default: chromium
+          enum:
+          - chromium
+          - chrome
+          - firefox
+          - chrome-nightly
+          - chrome-turbo
+        user_agent:
+          type: string
+          nullable: true
+        chrome_args:
+          type: array
+          items:
+            type: string
+        viewport_width:
+          type: integer
+          nullable: true
+        viewport_height:
+          type: integer
+          nullable: true
+        aspect_ratio:
+          type: string
+          enum:
+          - '5:4'
+          - '16:9'
+          nullable: true
+        use_file_storage:
+          type: boolean
+          default: true
+        screenshot_type:
+          type: string
+          default: last_action
+          enum:
+          - raw
+          - full
+          - last_action
+        web_bot_auth:
+          type: boolean
+          default: false
+        extra_http_headers:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        vault_id:
+          type: string
+          nullable: true
+    CookiesResponse:
+      type: object
+      properties:
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Notte API key obtained from the Notte Console (https://console.notte.cc), passed as a Bearer token in the Authorization header. The SDK reads the NOTTE_API_KEY environment variable automatically.
