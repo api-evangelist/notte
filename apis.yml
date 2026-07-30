@@ -7,7 +7,20 @@ description: Notte is web browser and agent infrastructure for AI. The REST API 
   natural-language tasks, observes and acts on pages, scrapes structured data, and
   manages personas, vaults, profiles, and serverless functions. The core framework
   is open source (SSPL-1.0) on GitHub under nottelabs.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/notte.png
 tags:
 - AI
 - Web Agents
@@ -18,132 +31,258 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: notte:sessions
-  name: Notte Sessions API
-  tags:
-  - Sessions
-  - Cloud Browser
-  - CDP
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: notte:notte-agents-api
+  name: Notte Agents API
+  description: Run autonomous web agents from natural-language tasks.
   humanURL: https://docs.notte.cc/api-reference/sessions/session-start
   baseURL: https://api.notte.cc
-  properties:
-  - url: https://docs.notte.cc/features/sessions/overview
-    type: Documentation
-  - url: https://docs.notte.cc/api-reference/sessions/session-start
-    type: APIReference
-  - url: openapi/notte-openapi.yml
-    type: OpenAPI
-  - url: collections/notte.postman_collection.json
-    type: PostmanCollection
-  - url: collections/notte.opencollection.json
-    type: OpenCollection
-  - url: https://github.com/nottelabs/notte
-    type: GitHub
-  description: Start, status, and stop remote cloud browser sessions with stealth,
-    proxies, and CAPTCHA solving. Manage cookies, network logs, replay, debug info,
-    and CDP/viewer connection URLs for Playwright, Puppeteer, Selenium, or browser-use.
-- aid: notte:agents
-  name: Notte Agents API
   tags:
   - Agents
-  - Autonomous
-  - Natural Language
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.notte.cc/api-reference/agents/agent-start
-  baseURL: https://api.notte.cc
   properties:
-  - url: https://docs.notte.cc/features/agents/overview
-    type: Documentation
-  - url: https://docs.notte.cc/api-reference/agents/agent-start
-    type: APIReference
-  - url: openapi/notte-openapi.yml
-    type: OpenAPI
-  - url: collections/notte.postman_collection.json
-    type: PostmanCollection
-  - url: collections/notte.opencollection.json
-    type: OpenCollection
-  - url: https://github.com/nottelabs/notte
-    type: GitHub
-  description: Run autonomous web agents that take a natural-language task and act
-    on a browser session. Start, poll status, stop, list agents, request structured
-    (Pydantic) output, and retrieve the generated workflow script.
-- aid: notte:page
-  name: Notte Page Observe / Step / Scrape API
+  - type: OpenAPI
+    url: openapi/notte-agents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.notte.cc/features/sessions/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/session-start
+  - type: PostmanCollection
+    url: collections/notte.postman_collection.json
+  - type: OpenCollection
+    url: collections/notte.opencollection.json
+  - type: GitHub
+    url: https://github.com/nottelabs/notte
+  - type: Documentation
+    url: https://docs.notte.cc/features/agents/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/agents/agent-start
+  - type: Documentation
+    url: https://docs.notte.cc/features/perception/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/page-observe
+  - type: Documentation
+    url: https://docs.notte.cc/features/scraping/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+  - type: Documentation
+    url: https://docs.notte.cc/features/personas/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/personas/persona-create
+- aid: notte:notte-health-api
+  name: Notte Health API
+  description: Service health check.
+  humanURL: https://docs.notte.cc/api-reference/sessions/session-start
+  baseURL: https://api.notte.cc
   tags:
-  - Perception
-  - Observe
-  - Step
-  - Scrape
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.notte.cc/api-reference/sessions/page-observe
-  baseURL: https://api.notte.cc
+  - Health
   properties:
-  - url: https://docs.notte.cc/features/perception/overview
-    type: Documentation
-  - url: https://docs.notte.cc/api-reference/sessions/page-observe
-    type: APIReference
-  - url: openapi/notte-openapi.yml
-    type: OpenAPI
-  - url: collections/notte.postman_collection.json
-    type: PostmanCollection
-  - url: collections/notte.opencollection.json
-    type: OpenCollection
-  - url: https://github.com/nottelabs/notte
-    type: GitHub
-  description: Notte's perception layer for a live session - observe the page to list
-    available actions, execute (step) an action such as click/fill/scroll/navigate,
-    scrape structured content from the current page, and capture screenshots.
-- aid: notte:scrape
-  name: Notte Scraping API
+  - type: OpenAPI
+    url: openapi/notte-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.notte.cc/features/sessions/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/session-start
+  - type: PostmanCollection
+    url: collections/notte.postman_collection.json
+  - type: OpenCollection
+    url: collections/notte.opencollection.json
+  - type: GitHub
+    url: https://github.com/nottelabs/notte
+  - type: Documentation
+    url: https://docs.notte.cc/features/agents/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/agents/agent-start
+  - type: Documentation
+    url: https://docs.notte.cc/features/perception/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/page-observe
+  - type: Documentation
+    url: https://docs.notte.cc/features/scraping/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+  - type: Documentation
+    url: https://docs.notte.cc/features/personas/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/personas/persona-create
+- aid: notte:notte-page-api
+  name: Notte Page API
+  description: Perception layer - observe, step (execute), and scrape a live session page.
+  humanURL: https://docs.notte.cc/api-reference/sessions/session-start
+  baseURL: https://api.notte.cc
   tags:
-  - Scraping
-  - Extraction
-  - Structured Data
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.notte.cc/api-reference/scrape/scrape-webpage
-  baseURL: https://api.notte.cc
+  - Page
   properties:
-  - url: https://docs.notte.cc/features/scraping/overview
-    type: Documentation
-  - url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
-    type: APIReference
-  - url: openapi/notte-openapi.yml
-    type: OpenAPI
-  - url: collections/notte.postman_collection.json
-    type: PostmanCollection
-  - url: collections/notte.opencollection.json
-    type: OpenCollection
-  - url: https://github.com/nottelabs/notte
-    type: GitHub
-  description: One-shot scraping endpoints that fetch a URL (or accept raw HTML) and
-    return main content, links, images, or AI-extracted structured data against a
-    response format, plus an AI web search endpoint.
-- aid: notte:personas-vaults
-  name: Notte Personas and Vaults API
+  - type: OpenAPI
+    url: openapi/notte-page-api-openapi.yml
+  - type: Documentation
+    url: https://docs.notte.cc/features/sessions/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/session-start
+  - type: PostmanCollection
+    url: collections/notte.postman_collection.json
+  - type: OpenCollection
+    url: collections/notte.opencollection.json
+  - type: GitHub
+    url: https://github.com/nottelabs/notte
+  - type: Documentation
+    url: https://docs.notte.cc/features/agents/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/agents/agent-start
+  - type: Documentation
+    url: https://docs.notte.cc/features/perception/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/page-observe
+  - type: Documentation
+    url: https://docs.notte.cc/features/scraping/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+  - type: Documentation
+    url: https://docs.notte.cc/features/personas/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/personas/persona-create
+- aid: notte:notte-personas-api
+  name: Notte Personas API
+  description: Disposable digital identities with email, phone, and 2FA.
+  humanURL: https://docs.notte.cc/api-reference/sessions/session-start
+  baseURL: https://api.notte.cc
   tags:
   - Personas
-  - Vaults
-  - Credentials
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.notte.cc/api-reference/personas/persona-create
-  baseURL: https://api.notte.cc
   properties:
-  - url: https://docs.notte.cc/features/personas/overview
-    type: Documentation
-  - url: https://docs.notte.cc/api-reference/personas/persona-create
-    type: APIReference
-  - url: openapi/notte-openapi.yml
-    type: OpenAPI
-  - url: collections/notte.postman_collection.json
-    type: PostmanCollection
-  - url: collections/notte.opencollection.json
-    type: OpenCollection
-  - url: https://github.com/nottelabs/notte
-    type: GitHub
-  description: Personas are disposable digital identities with email addresses, phone
-    numbers, and automated 2FA for account workflows. Vaults securely store credentials
-    and credit cards that are injected into agent and session runs.
+  - type: OpenAPI
+    url: openapi/notte-personas-api-openapi.yml
+  - type: Documentation
+    url: https://docs.notte.cc/features/sessions/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/session-start
+  - type: PostmanCollection
+    url: collections/notte.postman_collection.json
+  - type: OpenCollection
+    url: collections/notte.opencollection.json
+  - type: GitHub
+    url: https://github.com/nottelabs/notte
+  - type: Documentation
+    url: https://docs.notte.cc/features/agents/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/agents/agent-start
+  - type: Documentation
+    url: https://docs.notte.cc/features/perception/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/page-observe
+  - type: Documentation
+    url: https://docs.notte.cc/features/scraping/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+  - type: Documentation
+    url: https://docs.notte.cc/features/personas/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/personas/persona-create
+- aid: notte:notte-scraping-api
+  name: Notte Scraping API
+  description: One-shot scraping of a URL or raw HTML, plus AI web search.
+  humanURL: https://docs.notte.cc/api-reference/sessions/session-start
+  baseURL: https://api.notte.cc
+  tags:
+  - Scraping
+  properties:
+  - type: OpenAPI
+    url: openapi/notte-scraping-api-openapi.yml
+  - type: Documentation
+    url: https://docs.notte.cc/features/sessions/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/session-start
+  - type: PostmanCollection
+    url: collections/notte.postman_collection.json
+  - type: OpenCollection
+    url: collections/notte.opencollection.json
+  - type: GitHub
+    url: https://github.com/nottelabs/notte
+  - type: Documentation
+    url: https://docs.notte.cc/features/agents/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/agents/agent-start
+  - type: Documentation
+    url: https://docs.notte.cc/features/perception/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/page-observe
+  - type: Documentation
+    url: https://docs.notte.cc/features/scraping/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+  - type: Documentation
+    url: https://docs.notte.cc/features/personas/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/personas/persona-create
+- aid: notte:notte-sessions-api
+  name: Notte Sessions API
+  description: Create and manage remote cloud browser sessions.
+  humanURL: https://docs.notte.cc/api-reference/sessions/session-start
+  baseURL: https://api.notte.cc
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/notte-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.notte.cc/features/sessions/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/session-start
+  - type: PostmanCollection
+    url: collections/notte.postman_collection.json
+  - type: OpenCollection
+    url: collections/notte.opencollection.json
+  - type: GitHub
+    url: https://github.com/nottelabs/notte
+  - type: Documentation
+    url: https://docs.notte.cc/features/agents/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/agents/agent-start
+  - type: Documentation
+    url: https://docs.notte.cc/features/perception/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/page-observe
+  - type: Documentation
+    url: https://docs.notte.cc/features/scraping/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+  - type: Documentation
+    url: https://docs.notte.cc/features/personas/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/personas/persona-create
+- aid: notte:notte-vaults-api
+  name: Notte Vaults API
+  description: Secure credential and credit-card storage injected into runs.
+  humanURL: https://docs.notte.cc/api-reference/sessions/session-start
+  baseURL: https://api.notte.cc
+  tags:
+  - Vaults
+  properties:
+  - type: OpenAPI
+    url: openapi/notte-vaults-api-openapi.yml
+  - type: Documentation
+    url: https://docs.notte.cc/features/sessions/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/session-start
+  - type: PostmanCollection
+    url: collections/notte.postman_collection.json
+  - type: OpenCollection
+    url: collections/notte.opencollection.json
+  - type: GitHub
+    url: https://github.com/nottelabs/notte
+  - type: Documentation
+    url: https://docs.notte.cc/features/agents/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/agents/agent-start
+  - type: Documentation
+    url: https://docs.notte.cc/features/perception/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/sessions/page-observe
+  - type: Documentation
+    url: https://docs.notte.cc/features/scraping/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/scrape/scrape-webpage
+  - type: Documentation
+    url: https://docs.notte.cc/features/personas/overview
+  - type: APIReference
+    url: https://docs.notte.cc/api-reference/personas/persona-create
 common:
 - type: AgenticAccess
   url: agentic-access/notte-agentic-access.yml
