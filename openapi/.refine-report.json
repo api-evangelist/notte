@@ -1,0 +1,26 @@
+{
+  "provider": "notte",
+  "sources": [
+    "notte-agents-api-openapi.yml",
+    "notte-health-api-openapi.yml",
+    "notte-page-api-openapi.yml",
+    "notte-personas-api-openapi.yml",
+    "notte-scraping-api-openapi.yml",
+    "notte-sessions-api-openapi.yml",
+    "notte-vaults-api-openapi.yml"
+  ],
+  "outputs": [
+    "notte-agents-api-openapi.yml",
+    "notte-health-api-openapi.yml",
+    "notte-page-api-openapi.yml",
+    "notte-personas-api-openapi.yml",
+    "notte-scraping-api-openapi.yml",
+    "notte-sessions-api-openapi.yml",
+    "notte-vaults-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
