@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Notte Agents Page API",
+    "version": "1.4.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Page",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Page Observe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/:session_id/page/observe",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs Notte's perception layer on the current page and returns the set of available actions a model or human can take next."
+        },
+        {
+          "info": {
+            "name": "Page Execute (Step)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/:session_id/page/execute",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a single action (a step) on the current page, such as click, fill, scroll, navigate, select, upload, or wait."
+        },
+        {
+          "info": {
+            "name": "Page Scrape",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/:session_id/page/scrape",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Scrapes structured content from the current page of a session."
+        },
+        {
+          "info": {
+            "name": "Page Screenshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/:session_id/page/screenshot",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Captures a screenshot of the current page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

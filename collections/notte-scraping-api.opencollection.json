@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Notte Agents Scraping API",
+    "version": "1.4.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scraping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Scrape Webpage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/scrape",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "One-shot scrape of a URL. Returns main content, links, images, or AI-extracted structured data against an optional response format."
+        },
+        {
+          "info": {
+            "name": "Scrape From HTML",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/scrape_from_html",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Scrapes structured content from a supplied raw HTML payload."
+        },
+        {
+          "info": {
+            "name": "Search Web",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs an AI web search and returns results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

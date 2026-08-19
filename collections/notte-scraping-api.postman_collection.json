@@ -1,0 +1,338 @@
+{
+  "item": [
+    {
+      "id": "69109c72-c49e-43a2-8e83-72687b596335",
+      "name": "Scraping",
+      "description": {
+        "content": "One-shot scraping of a URL or raw HTML, plus AI web search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c94f959c-b343-4c92-9c32-2001e26cb675",
+          "name": "Scrape Webpage",
+          "request": {
+            "name": "Scrape Webpage",
+            "description": {
+              "content": "One-shot scrape of a URL. Returns main content, links, images, or AI-extracted structured data against an optional response format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scrape"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<string>\",\n  \"selector\": \"<string>\",\n  \"scrape_links\": false,\n  \"scrape_images\": false,\n  \"ignored_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"only_main_content\": true,\n  \"only_images\": false,\n  \"response_format\": \"<object>\",\n  \"instructions\": \"<string>\",\n  \"use_link_placeholders\": false,\n  \"headless\": true,\n  \"solve_captchas\": false,\n  \"proxies\": \"<boolean>\",\n  \"browser_type\": \"chromium\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "61e13d0c-cd2c-4e47-8521-6695ad0879d2",
+              "name": "The scraped content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"selector\": \"<string>\",\n  \"scrape_links\": false,\n  \"scrape_images\": false,\n  \"ignored_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"only_main_content\": true,\n  \"only_images\": false,\n  \"response_format\": \"<object>\",\n  \"instructions\": \"<string>\",\n  \"use_link_placeholders\": false,\n  \"headless\": true,\n  \"solve_captchas\": false,\n  \"proxies\": \"<boolean>\",\n  \"browser_type\": \"chromium\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"content\": \"string\",\n  \"structured\": {},\n  \"links\": [\n    \"string\",\n    \"string\"\n  ],\n  \"images\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85b432c2-256f-4575-a59b-c9ce6f184699",
+          "name": "Scrape From HTML",
+          "request": {
+            "name": "Scrape From HTML",
+            "description": {
+              "content": "Scrapes structured content from a supplied raw HTML payload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scrape_from_html"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"selector\": \"<string>\",\n  \"scrape_links\": false,\n  \"scrape_images\": false,\n  \"ignored_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"only_main_content\": true,\n  \"only_images\": false,\n  \"response_format\": \"<object>\",\n  \"instructions\": \"<string>\",\n  \"use_link_placeholders\": false,\n  \"frames\": [\n    {\n      \"html\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    {\n      \"html\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "05c586f2-c7b3-49df-a78f-47a636fe935b",
+              "name": "The scraped content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape_from_html"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selector\": \"<string>\",\n  \"scrape_links\": false,\n  \"scrape_images\": false,\n  \"ignored_tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"only_main_content\": true,\n  \"only_images\": false,\n  \"response_format\": \"<object>\",\n  \"instructions\": \"<string>\",\n  \"use_link_placeholders\": false,\n  \"frames\": [\n    {\n      \"html\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    {\n      \"html\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"content\": \"string\",\n  \"structured\": {},\n  \"links\": [\n    \"string\",\n    \"string\"\n  ],\n  \"images\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de65cc80-d1bf-4760-b9c5-b2f0130f2def",
+          "name": "Search Web",
+          "request": {
+            "name": "Search Web",
+            "description": {
+              "content": "Runs an AI web search and returns results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"q\": \"<string>\",\n  \"depth\": \"<string>\",\n  \"outputType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25fd5c68-586d-439b-a254-7c06fd073cf9",
+              "name": "The search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"q\": \"<string>\",\n  \"depth\": \"<string>\",\n  \"outputType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.notte.cc",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "38f2249c-d217-476a-bea2-61fbf9eb2496",
+    "name": "Notte Agents Scraping API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.\n\nContact Support:\n Name: Notte",
+      "type": "text/plain"
+    }
+  }
+}

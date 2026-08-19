@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Notte Agents Vaults API",
+    "version": "1.4.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vaults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vault Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/vaults/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a secure vault for storing credentials and credit cards."
+        },
+        {
+          "info": {
+            "name": "List Vaults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/vaults"
+          },
+          "docs": "Lists vaults for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Vault Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/vaults/:vault_id",
+            "params": [
+              {
+                "name": "vault_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a vault."
+        },
+        {
+          "info": {
+            "name": "Vault Credentials Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/vaults/:vault_id/credentials",
+            "params": [
+              {
+                "name": "vault_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns stored credentials for a vault."
+        },
+        {
+          "info": {
+            "name": "Vault Credentials Add",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/vaults/:vault_id/credentials",
+            "params": [
+              {
+                "name": "vault_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds credentials to a vault."
+        },
+        {
+          "info": {
+            "name": "Vault Credentials Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/vaults/:vault_id/credentials",
+            "params": [
+              {
+                "name": "vault_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes credentials from a vault."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Notte Agents Personas API",
+    "version": "1.4.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Personas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Persona Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/personas/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a disposable digital identity, optionally with a phone number and a dedicated vault, for account-creation and authentication workflows."
+        },
+        {
+          "info": {
+            "name": "List Personas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/personas"
+          },
+          "docs": "Lists personas for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Persona Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/personas/:persona_id",
+            "params": [
+              {
+                "name": "persona_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a persona by ID."
+        },
+        {
+          "info": {
+            "name": "Persona Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/personas/:persona_id",
+            "params": [
+              {
+                "name": "persona_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a persona."
+        },
+        {
+          "info": {
+            "name": "Persona Emails List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/personas/:persona_id/emails",
+            "params": [
+              {
+                "name": "persona_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists emails received by the persona inbox."
+        },
+        {
+          "info": {
+            "name": "Persona SMS List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/personas/:persona_id/sms",
+            "params": [
+              {
+                "name": "persona_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists SMS messages received by the persona phone number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

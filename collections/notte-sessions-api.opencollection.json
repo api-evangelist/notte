@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Notte Agents Sessions API",
+    "version": "1.4.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Session Start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a remote cloud browser session."
+        },
+        {
+          "info": {
+            "name": "List Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions",
+            "params": [
+              {
+                "name": "only_active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists sessions for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Session Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the current status of a session."
+        },
+        {
+          "info": {
+            "name": "Session Stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/sessions/:session_id/stop",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops and closes a running session."
+        },
+        {
+          "info": {
+            "name": "Session Debug Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions/:session_id/debug",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns debug information including the live viewer and CDP URLs."
+        },
+        {
+          "info": {
+            "name": "Session Replay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions/:session_id/replay",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a replay (WEBP) of the session."
+        },
+        {
+          "info": {
+            "name": "Session Cookies Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/sessions/:session_id/cookies",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the cookies for a session."
+        },
+        {
+          "info": {
+            "name": "Session Cookies Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/sessions/:session_id/cookies",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets cookies on a session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Notte Agents API",
+    "version": "1.4.40"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agent Start",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.notte.cc/agents/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts an autonomous web agent that performs a natural-language task on a browser session."
+        },
+        {
+          "info": {
+            "name": "List Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/agents",
+            "params": [
+              {
+                "name": "only_active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists agents for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Agent Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/agents/:agent_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the status and result of an agent run."
+        },
+        {
+          "info": {
+            "name": "Agent Stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.notte.cc/agents/:agent_id/stop",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops a running agent."
+        },
+        {
+          "info": {
+            "name": "Get Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.notte.cc/agents/:agent_id/workflow/code",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the reproducible workflow script generated from an agent run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

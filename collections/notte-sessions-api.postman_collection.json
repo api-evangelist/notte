@@ -1,0 +1,856 @@
+{
+  "item": [
+    {
+      "id": "9adc8d62-5150-48b6-8ce8-6382e1608570",
+      "name": "Sessions",
+      "description": {
+        "content": "Create and manage remote cloud browser sessions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58a0ed52-6649-4792-85df-0e125ba18ed6",
+          "name": "Session Start",
+          "request": {
+            "name": "Session Start",
+            "description": {
+              "content": "Starts a remote cloud browser session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"headless\": true,\n  \"solve_captchas\": false,\n  \"max_duration_minutes\": 15,\n  \"idle_timeout_minutes\": 3,\n  \"proxies\": \"<boolean>\",\n  \"browser_type\": \"chromium\",\n  \"user_agent\": \"<string>\",\n  \"chrome_args\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"viewport_width\": \"<integer>\",\n  \"viewport_height\": \"<integer>\",\n  \"aspect_ratio\": \"<string>\",\n  \"use_file_storage\": true,\n  \"screenshot_type\": \"last_action\",\n  \"web_bot_auth\": false,\n  \"extra_http_headers\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"vault_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dcb7b962-324c-46b4-9ade-f517a7a40260",
+              "name": "The started session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"headless\": true,\n  \"solve_captchas\": false,\n  \"max_duration_minutes\": 15,\n  \"idle_timeout_minutes\": 3,\n  \"proxies\": \"<boolean>\",\n  \"browser_type\": \"chromium\",\n  \"user_agent\": \"<string>\",\n  \"chrome_args\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"viewport_width\": \"<integer>\",\n  \"viewport_height\": \"<integer>\",\n  \"aspect_ratio\": \"<string>\",\n  \"use_file_storage\": true,\n  \"screenshot_type\": \"last_action\",\n  \"web_bot_auth\": false,\n  \"extra_http_headers\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"vault_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"string\",\n  \"status\": \"closed\",\n  \"created_at\": \"1981-03-23T02:28:49.537Z\",\n  \"last_accessed_at\": \"1976-08-28T16:23:13.742Z\",\n  \"idle_timeout_minutes\": 1833,\n  \"max_duration_minutes\": 2618,\n  \"browser_type\": \"string\",\n  \"user_agent\": \"string\",\n  \"viewport_width\": 9821,\n  \"viewport_height\": 4062,\n  \"network_request_bytes\": 556,\n  \"network_response_bytes\": 5799,\n  \"viewer_url\": \"string\",\n  \"cdp_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a59f2e2-125b-4884-a9ed-a0af931d535d",
+          "name": "List Sessions",
+          "request": {
+            "name": "List Sessions",
+            "description": {
+              "content": "Lists sessions for the authenticated account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "only_active",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f16fc8e6-10ad-4c75-99b8-b319365f437e",
+              "name": "A paginated list of sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "only_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"session_id\": \"string\",\n    \"status\": \"active\",\n    \"created_at\": \"2017-07-07T11:58:43.339Z\",\n    \"last_accessed_at\": \"1948-07-17T22:51:59.417Z\",\n    \"idle_timeout_minutes\": 7870,\n    \"max_duration_minutes\": 3867,\n    \"browser_type\": \"string\",\n    \"user_agent\": \"string\",\n    \"viewport_width\": 7414,\n    \"viewport_height\": 1915,\n    \"network_request_bytes\": 9459,\n    \"network_response_bytes\": 3380,\n    \"viewer_url\": \"string\",\n    \"cdp_url\": \"string\"\n  },\n  {\n    \"session_id\": \"string\",\n    \"status\": \"active\",\n    \"created_at\": \"2014-06-25T22:26:25.293Z\",\n    \"last_accessed_at\": \"1954-06-25T06:25:21.697Z\",\n    \"idle_timeout_minutes\": 2742,\n    \"max_duration_minutes\": 8572,\n    \"browser_type\": \"string\",\n    \"user_agent\": \"string\",\n    \"viewport_width\": 1172,\n    \"viewport_height\": 3308,\n    \"network_request_bytes\": 3259,\n    \"network_response_bytes\": 1699,\n    \"viewer_url\": \"string\",\n    \"cdp_url\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e570a9f-298c-482a-994c-3d127adcdc92",
+          "name": "Session Status",
+          "request": {
+            "name": "Session Status",
+            "description": {
+              "content": "Returns the current status of a session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39e40456-df66-489c-8286-dc7ef7893d24",
+              "name": "The session status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"string\",\n  \"status\": \"closed\",\n  \"created_at\": \"1981-03-23T02:28:49.537Z\",\n  \"last_accessed_at\": \"1976-08-28T16:23:13.742Z\",\n  \"idle_timeout_minutes\": 1833,\n  \"max_duration_minutes\": 2618,\n  \"browser_type\": \"string\",\n  \"user_agent\": \"string\",\n  \"viewport_width\": 9821,\n  \"viewport_height\": 4062,\n  \"network_request_bytes\": 556,\n  \"network_response_bytes\": 5799,\n  \"viewer_url\": \"string\",\n  \"cdp_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6ee96f5-63ba-4489-971c-d430d513147f",
+          "name": "Session Stop",
+          "request": {
+            "name": "Session Stop",
+            "description": {
+              "content": "Stops and closes a running session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5864b0a8-b5c7-4166-ada9-a14c760a0cd5",
+              "name": "The closed session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"string\",\n  \"status\": \"closed\",\n  \"created_at\": \"1981-03-23T02:28:49.537Z\",\n  \"last_accessed_at\": \"1976-08-28T16:23:13.742Z\",\n  \"idle_timeout_minutes\": 1833,\n  \"max_duration_minutes\": 2618,\n  \"browser_type\": \"string\",\n  \"user_agent\": \"string\",\n  \"viewport_width\": 9821,\n  \"viewport_height\": 4062,\n  \"network_request_bytes\": 556,\n  \"network_response_bytes\": 5799,\n  \"viewer_url\": \"string\",\n  \"cdp_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "970e8421-43bf-4692-a438-bad9ce7baaff",
+          "name": "Session Debug Info",
+          "request": {
+            "name": "Session Debug Info",
+            "description": {
+              "content": "Returns debug information including the live viewer and CDP URLs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "debug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4af2a29a-0487-4890-b884-f69fc5fe4b32",
+              "name": "Debug information for the session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "debug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ws_url\": \"string\",\n  \"cdp_url\": \"string\",\n  \"viewer_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64bacb46-708c-4939-9da9-214539d74787",
+          "name": "Session Replay",
+          "request": {
+            "name": "Session Replay",
+            "description": {
+              "content": "Returns a replay (WEBP) of the session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "replay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a39291f-65b4-4695-aef8-ab2c23100372",
+              "name": "Session replay binary.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c60e3c1d-82e7-48b7-b5ef-1382ef373796",
+          "name": "Session Cookies Get",
+          "request": {
+            "name": "Session Cookies Get",
+            "description": {
+              "content": "Returns the cookies for a session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "cookies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f557e6d5-0588-40e5-a396-9d8e283ef417",
+              "name": "The session cookies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "cookies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cookies\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"domain\": \"string\",\n      \"path\": \"string\",\n      \"expires\": 742.7021678043877,\n      \"httpOnly\": false,\n      \"secure\": true,\n      \"sameSite\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"domain\": \"string\",\n      \"path\": \"string\",\n      \"expires\": 7864.856018682482,\n      \"httpOnly\": true,\n      \"secure\": false,\n      \"sameSite\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0e422ba-bb2e-434a-9d10-5a1f8f5063c6",
+          "name": "Session Cookies Set",
+          "request": {
+            "name": "Session Cookies Set",
+            "description": {
+              "content": "Sets cookies on a session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "cookies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cookies\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\",\n      \"domain\": \"<string>\",\n      \"path\": \"<string>\",\n      \"expires\": \"<number>\",\n      \"httpOnly\": \"<boolean>\",\n      \"secure\": \"<boolean>\",\n      \"sameSite\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\",\n      \"domain\": \"<string>\",\n      \"path\": \"<string>\",\n      \"expires\": \"<number>\",\n      \"httpOnly\": \"<boolean>\",\n      \"secure\": \"<boolean>\",\n      \"sameSite\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "600af67c-b808-4cef-8191-897ca8440c74",
+              "name": "Cookies set.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "cookies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cookies\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\",\n      \"domain\": \"<string>\",\n      \"path\": \"<string>\",\n      \"expires\": \"<number>\",\n      \"httpOnly\": \"<boolean>\",\n      \"secure\": \"<boolean>\",\n      \"sameSite\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\",\n      \"domain\": \"<string>\",\n      \"path\": \"<string>\",\n      \"expires\": \"<number>\",\n      \"httpOnly\": \"<boolean>\",\n      \"secure\": \"<boolean>\",\n      \"sameSite\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cookies\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\",\n      \"domain\": \"<string>\",\n      \"path\": \"<string>\",\n      \"expires\": \"<number>\",\n      \"httpOnly\": \"<boolean>\",\n      \"secure\": \"<boolean>\",\n      \"sameSite\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\",\n      \"domain\": \"<string>\",\n      \"path\": \"<string>\",\n      \"expires\": \"<number>\",\n      \"httpOnly\": \"<boolean>\",\n      \"secure\": \"<boolean>\",\n      \"sameSite\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.notte.cc",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "89d6ed5e-31f3-4e8c-8a7c-aad02f6834aa",
+    "name": "Notte Agents Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.\n\nContact Support:\n Name: Notte",
+      "type": "text/plain"
+    }
+  }
+}
