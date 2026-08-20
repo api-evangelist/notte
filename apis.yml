@@ -22,6 +22,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/notte.png
 tags:
+- Artificial Intelligence
+- Web Agents
+- Browser Automation
+- Sessions
+- Scraping
+tags_raw:
 - AI
 - Web Agents
 - Browser Automation
@@ -253,6 +259,8 @@ apis:
   humanURL: https://docs.notte.cc/api-reference/sessions/session-start
   baseURL: https://api.notte.cc
   tags:
+  - Vault
+  tags_raw:
   - Vaults
   properties:
   - type: OpenAPI
