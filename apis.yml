@@ -7,6 +7,18 @@ description: Notte is web browser and agent infrastructure for AI. The REST API 
   natural-language tasks, observes and acts on pages, scrapes structured data, and
   manages personas, vaults, profiles, and serverless functions. The core framework
   is open source (SSPL-1.0) on GitHub under nottelabs.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
