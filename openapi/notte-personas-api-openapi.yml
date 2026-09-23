@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Notte Agents Personas API
-  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  title: Notte Personas API
+  description: Notte is a REST API for web browser and agent infrastructure for AI.
   termsOfService: https://notte.cc/terms
   contact:
     name: Notte
@@ -127,31 +127,7 @@ paths:
                 items:
                   type: object
 components:
-  parameters:
-    PersonaId:
-      name: persona_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    PersonaResponse:
-      type: object
-      properties:
-        persona_id:
-          type: string
-        email:
-          type: string
-          nullable: true
-        phone_number:
-          type: string
-          nullable: true
-        vault_id:
-          type: string
-          nullable: true
-        created_at:
-          type: string
-          format: date-time
     PersonaCreateRequest:
       type: object
       properties:
@@ -163,6 +139,33 @@ components:
           type: boolean
           default: false
           description: Whether to provision a phone number for the persona.
+    PersonaResponse:
+      type: object
+      properties:
+        persona_id:
+          type: string
+        email:
+          type:
+          - string
+          - 'null'
+        phone_number:
+          type:
+          - string
+          - 'null'
+        vault_id:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+  parameters:
+    PersonaId:
+      name: persona_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

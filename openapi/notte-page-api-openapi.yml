@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Notte Agents Page API
-  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  title: Notte Page API
+  description: Notte is a REST API for web browser and agent infrastructure for AI.
   termsOfService: https://notte.cc/terms
   contact:
     name: Notte
@@ -103,48 +103,6 @@ paths:
                 format: binary
 components:
   schemas:
-    ObserveRequest:
-      type: object
-      properties:
-        min_nb_actions:
-          type: integer
-          nullable: true
-          description: Minimum number of actions to surface.
-        max_nb_actions:
-          type: integer
-          nullable: true
-          description: Maximum number of actions to surface.
-        instructions:
-          type: string
-          nullable: true
-          description: Natural-language guidance for what to look for on the page.
-        perception_type:
-          type: string
-          nullable: true
-          description: Perception strategy to apply.
-    ScrapeResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        content:
-          type: string
-          nullable: true
-          description: The extracted main content (markdown).
-        structured:
-          type: object
-          nullable: true
-          description: AI-extracted structured data matching the response_format.
-        links:
-          type: array
-          items:
-            type: string
-          nullable: true
-        images:
-          type: array
-          items:
-            type: string
-          nullable: true
     StepResponse:
       type: object
       properties:
@@ -153,28 +111,33 @@ components:
         success:
           type: boolean
         message:
-          type: string
-          nullable: true
-    ObserveResponse:
+          type:
+          - string
+          - 'null'
+    Action:
       type: object
+      description: A single browser action. Examples include click, fill, check, scroll, goto, go_back, go_forward, reload, wait, press_key, select_dropdown_option, upload_file, download_file, scrape, and captcha_solve.
+      required:
+      - type
       properties:
-        session_id:
+        type:
           type: string
-        title:
-          type: string
+          example: click
+        id:
+          type:
+          - string
+          - 'null'
+          description: The action identifier returned by observe.
+        value:
+          type:
+          - string
+          - 'null'
+          description: The value for fill / select / press_key style actions.
         url:
-          type: string
-        screenshot:
-          type: string
-          nullable: true
-        space:
-          type: object
-          description: The action space - the set of available actions on the page.
-          properties:
-            actions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Action'
+          type:
+          - string
+          - 'null'
+          description: The target URL for a goto action.
     StepRequest:
       type: object
       required:
@@ -186,8 +149,9 @@ components:
       type: object
       properties:
         selector:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Optional CSS selector to scope extraction.
         scrape_links:
           type: boolean
@@ -196,10 +160,11 @@ components:
           type: boolean
           default: false
         ignored_tags:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         only_main_content:
           type: boolean
           default: true
@@ -207,37 +172,89 @@ components:
           type: boolean
           default: false
         response_format:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           description: A JSON schema (e.g. derived from a Pydantic model) for AI-structured extraction.
         instructions:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Natural-language extraction instructions.
         use_link_placeholders:
           type: boolean
           default: false
-    Action:
+    ObserveRequest:
       type: object
-      description: A single browser action. Examples include click, fill, check, scroll, goto, go_back, go_forward, reload, wait, press_key, select_dropdown_option, upload_file, download_file, scrape, and captcha_solve.
-      required:
-      - type
       properties:
-        type:
+        min_nb_actions:
+          type:
+          - integer
+          - 'null'
+          description: Minimum number of actions to surface.
+        max_nb_actions:
+          type:
+          - integer
+          - 'null'
+          description: Maximum number of actions to surface.
+        instructions:
+          type:
+          - string
+          - 'null'
+          description: Natural-language guidance for what to look for on the page.
+        perception_type:
+          type:
+          - string
+          - 'null'
+          description: Perception strategy to apply.
+    ObserveResponse:
+      type: object
+      properties:
+        session_id:
           type: string
-          example: click
-        id:
+        title:
           type: string
-          description: The action identifier returned by observe.
-          nullable: true
-        value:
-          type: string
-          description: The value for fill / select / press_key style actions.
-          nullable: true
         url:
           type: string
-          description: The target URL for a goto action.
-          nullable: true
+        screenshot:
+          type:
+          - string
+          - 'null'
+        space:
+          type: object
+          description: The action space - the set of available actions on the page.
+          properties:
+            actions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Action'
+    ScrapeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        content:
+          type:
+          - string
+          - 'null'
+          description: The extracted main content (markdown).
+        structured:
+          type:
+          - object
+          - 'null'
+          description: AI-extracted structured data matching the response_format.
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
   parameters:
     SessionId:
       name: session_id

@@ -1,0 +1,1 @@
+{"resource":"https://api.notte.cc/mcp","authorization_servers":["https://aavrhuwkonielawoxsow.supabase.co/auth/v1"],"scopes_supported":["email"],"bearer_methods_supported":["header"],"resource_name":"Notte Browser","resource_documentation":"https://docs.notte.cc/"}

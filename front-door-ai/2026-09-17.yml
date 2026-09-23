@@ -1,0 +1,33 @@
+# Front Door AI Index — notte — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: notte
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: notte.cc
+  final_host: www.notte.cc
+  ownership: own
+  owner: notte
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 26
+  host_score: 26
+  density: 21.04
+  words: 1236
+  tiers:
+    agentic: 5
+    core: 18
+    model: 3
+  ambiguous: 32
+  top_terms:
+    agent: 26
+    AI: 11
+    LLMs: 7
+    automation: 6
+    AI agent: 4
+    Anthropic: 1
+    Gemini: 1
+    OpenAI: 1
+    prompts: 1

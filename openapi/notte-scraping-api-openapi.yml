@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Notte Agents Scraping API
-  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  title: Notte Scraping API
+  description: Notte is a REST API for web browser and agent infrastructure for AI.
   termsOfService: https://notte.cc/terms
   contact:
     name: Notte
@@ -85,6 +85,20 @@ paths:
                       type: object
 components:
   schemas:
+    SearchRequest:
+      type: object
+      required:
+      - q
+      properties:
+        q:
+          type: string
+          description: The search query.
+        depth:
+          type: string
+          description: Search depth.
+        outputType:
+          type: string
+          description: Desired output type.
     GlobalScrapeRequest:
       allOf:
       - $ref: '#/components/schemas/ScrapeRequest'
@@ -110,29 +124,6 @@ components:
           browser_type:
             type: string
             default: chromium
-    ScrapeResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        content:
-          type: string
-          nullable: true
-          description: The extracted main content (markdown).
-        structured:
-          type: object
-          nullable: true
-          description: AI-extracted structured data matching the response_format.
-        links:
-          type: array
-          items:
-            type: string
-          nullable: true
-        images:
-          type: array
-          items:
-            type: string
-          nullable: true
     ScrapeFromHtmlRequest:
       allOf:
       - $ref: '#/components/schemas/ScrapeRequest'
@@ -148,26 +139,13 @@ components:
                   type: string
                 url:
                   type: string
-    SearchRequest:
-      type: object
-      required:
-      - q
-      properties:
-        q:
-          type: string
-          description: The search query.
-        depth:
-          type: string
-          description: Search depth.
-        outputType:
-          type: string
-          description: Desired output type.
     ScrapeRequest:
       type: object
       properties:
         selector:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Optional CSS selector to scope extraction.
         scrape_links:
           type: boolean
@@ -176,10 +154,11 @@ components:
           type: boolean
           default: false
         ignored_tags:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         only_main_content:
           type: boolean
           default: true
@@ -187,16 +166,45 @@ components:
           type: boolean
           default: false
         response_format:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           description: A JSON schema (e.g. derived from a Pydantic model) for AI-structured extraction.
         instructions:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Natural-language extraction instructions.
         use_link_placeholders:
           type: boolean
           default: false
+    ScrapeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        content:
+          type:
+          - string
+          - 'null'
+          description: The extracted main content (markdown).
+        structured:
+          type:
+          - object
+          - 'null'
+          description: AI-extracted structured data matching the response_format.
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
   securitySchemes:
     BearerAuth:
       type: http

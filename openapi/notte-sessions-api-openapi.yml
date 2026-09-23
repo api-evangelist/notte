@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Notte Agents Sessions API
-  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  title: Notte Sessions API
+  description: Notte is a REST API for web browser and agent infrastructure for AI.
   termsOfService: https://notte.cc/terms
   contact:
     name: Notte
@@ -183,33 +183,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CookiesResponse'
 components:
-  parameters:
-    SessionId:
-      name: session_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    Cookie:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        domain:
-          type: string
-        path:
-          type: string
-        expires:
-          type: number
-        httpOnly:
-          type: boolean
-        secure:
-          type: boolean
-        sameSite:
-          type: string
     SetCookiesRequest:
       type: object
       required:
@@ -219,49 +193,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Cookie'
-    SessionResponse:
-      type: object
-      properties:
-        session_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - active
-          - closed
-          - error
-          - timed_out
-        created_at:
-          type: string
-          format: date-time
-        last_accessed_at:
-          type: string
-          format: date-time
-        idle_timeout_minutes:
-          type: integer
-        max_duration_minutes:
-          type: integer
-        browser_type:
-          type: string
-        user_agent:
-          type: string
-          nullable: true
-        viewport_width:
-          type: integer
-          nullable: true
-        viewport_height:
-          type: integer
-          nullable: true
-        network_request_bytes:
-          type: integer
-        network_response_bytes:
-          type: integer
-        viewer_url:
-          type: string
-          nullable: true
-        cdp_url:
-          type: string
-          nullable: true
     SessionStartRequest:
       type: object
       properties:
@@ -300,24 +231,28 @@ components:
           - chrome-nightly
           - chrome-turbo
         user_agent:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         chrome_args:
           type: array
           items:
             type: string
         viewport_width:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         viewport_height:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         aspect_ratio:
-          type: string
+          type:
+          - string
+          - 'null'
           enum:
           - '5:4'
           - '16:9'
-          nullable: true
         use_file_storage:
           type: boolean
           default: true
@@ -332,13 +267,15 @@ components:
           type: boolean
           default: false
         extra_http_headers:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
             type: string
-          nullable: true
         vault_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
     CookiesResponse:
       type: object
       properties:
@@ -346,6 +283,80 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Cookie'
+    SessionResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - closed
+          - error
+          - timed_out
+        created_at:
+          type: string
+          format: date-time
+        last_accessed_at:
+          type: string
+          format: date-time
+        idle_timeout_minutes:
+          type: integer
+        max_duration_minutes:
+          type: integer
+        browser_type:
+          type: string
+        user_agent:
+          type:
+          - string
+          - 'null'
+        viewport_width:
+          type:
+          - integer
+          - 'null'
+        viewport_height:
+          type:
+          - integer
+          - 'null'
+        network_request_bytes:
+          type: integer
+        network_response_bytes:
+          type: integer
+        viewer_url:
+          type:
+          - string
+          - 'null'
+        cdp_url:
+          type:
+          - string
+          - 'null'
+    Cookie:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        domain:
+          type: string
+        path:
+          type: string
+        expires:
+          type: number
+        httpOnly:
+          type: boolean
+        secure:
+          type: boolean
+        sameSite:
+          type: string
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

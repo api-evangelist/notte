@@ -1,13 +1,7 @@
 {
   "provider": "notte",
   "sources": [
-    "notte-agents-api-openapi.yml",
-    "notte-health-api-openapi.yml",
-    "notte-page-api-openapi.yml",
-    "notte-personas-api-openapi.yml",
-    "notte-scraping-api-openapi.yml",
-    "notte-sessions-api-openapi.yml",
-    "notte-vaults-api-openapi.yml"
+    "_original/notte-openapi.yml"
   ],
   "outputs": [
     "notte-agents-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "notte-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "notte-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "notte-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "notte-page-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "notte-personas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "notte-scraping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "notte-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "notte-vaults-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

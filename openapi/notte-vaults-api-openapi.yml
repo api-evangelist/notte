@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Notte Agents Vaults API
-  description: Notte is a REST API for web browser and agent infrastructure for AI. It creates cloud browser sessions, runs autonomous web agents from natural-language tasks, exposes a perception layer to observe / step / scrape live pages, performs one-shot scraping and AI web search, and manages personas, vaults, profiles, secrets, file storage, and serverless functions. The core framework is open source (SSPL-1.0). This document models the primary documented surface; see https://api.notte.cc/openapi.json for the full machine-generated specification.
+  title: Notte Vaults API
+  description: Notte is a REST API for web browser and agent infrastructure for AI.
   termsOfService: https://notte.cc/terms
   contact:
     name: Notte
@@ -142,40 +142,45 @@ paths:
                     type: string
 components:
   schemas:
-    Vault:
-      type: object
-      properties:
-        vault_id:
-          type: string
-        name:
-          type: string
-          nullable: true
-        created_at:
-          type: string
-          format: date-time
     VaultCreateRequest:
       type: object
       properties:
         name:
           type: string
           description: The vault name.
+    Vault:
+      type: object
+      properties:
+        vault_id:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
     Credential:
       type: object
       properties:
         url:
           type: string
         username:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         password:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         mfa_secret:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
   parameters:
     VaultId:
       name: vault_id
