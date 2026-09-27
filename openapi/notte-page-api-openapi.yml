@@ -103,6 +103,13 @@ paths:
                 format: binary
 components:
   schemas:
+    StepRequest:
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          $ref: '#/components/schemas/Action'
     StepResponse:
       type: object
       properties:
@@ -114,6 +121,27 @@ components:
           type:
           - string
           - 'null'
+    ObserveResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+        screenshot:
+          type:
+          - string
+          - 'null'
+        space:
+          type: object
+          description: The action space - the set of available actions on the page.
+          properties:
+            actions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Action'
     Action:
       type: object
       description: A single browser action. Examples include click, fill, check, scroll, goto, go_back, go_forward, reload, wait, press_key, select_dropdown_option, upload_file, download_file, scrape, and captcha_solve.
@@ -138,13 +166,6 @@ components:
           - string
           - 'null'
           description: The target URL for a goto action.
-    StepRequest:
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          $ref: '#/components/schemas/Action'
     ScrapeRequest:
       type: object
       properties:
@@ -207,27 +228,6 @@ components:
           - string
           - 'null'
           description: Perception strategy to apply.
-    ObserveResponse:
-      type: object
-      properties:
-        session_id:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-        screenshot:
-          type:
-          - string
-          - 'null'
-        space:
-          type: object
-          description: The action space - the set of available actions on the page.
-          properties:
-            actions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Action'
     ScrapeResponse:
       type: object
       properties:

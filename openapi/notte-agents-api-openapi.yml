@@ -125,33 +125,7 @@ paths:
                   code:
                     type: string
 components:
-  parameters:
-    AgentId:
-      name: agent_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    AgentStatusResponse:
-      allOf:
-      - $ref: '#/components/schemas/AgentResponse'
-      - type: object
-        properties:
-          task:
-            type: string
-          success:
-            type:
-            - boolean
-            - 'null'
-          answer:
-            type:
-            - string
-            - 'null'
-          steps:
-            type: array
-            items:
-              type: object
     AgentStartRequest:
       type: object
       required:
@@ -226,6 +200,32 @@ components:
         saved:
           type: boolean
           default: false
+    AgentStatusResponse:
+      allOf:
+      - $ref: '#/components/schemas/AgentResponse'
+      - type: object
+        properties:
+          task:
+            type: string
+          success:
+            type:
+            - boolean
+            - 'null'
+          answer:
+            type:
+            - string
+            - 'null'
+          steps:
+            type: array
+            items:
+              type: object
+  parameters:
+    AgentId:
+      name: agent_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

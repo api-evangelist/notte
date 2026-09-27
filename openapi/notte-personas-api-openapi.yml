@@ -127,18 +127,14 @@ paths:
                 items:
                   type: object
 components:
+  parameters:
+    PersonaId:
+      name: persona_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    PersonaCreateRequest:
-      type: object
-      properties:
-        create_vault:
-          type: boolean
-          default: false
-          description: Whether to create a dedicated vault for the persona.
-        create_phone_number:
-          type: boolean
-          default: false
-          description: Whether to provision a phone number for the persona.
     PersonaResponse:
       type: object
       properties:
@@ -159,13 +155,17 @@ components:
         created_at:
           type: string
           format: date-time
-  parameters:
-    PersonaId:
-      name: persona_id
-      in: path
-      required: true
-      schema:
-        type: string
+    PersonaCreateRequest:
+      type: object
+      properties:
+        create_vault:
+          type: boolean
+          default: false
+          description: Whether to create a dedicated vault for the persona.
+        create_phone_number:
+          type: boolean
+          default: false
+          description: Whether to provision a phone number for the persona.
   securitySchemes:
     BearerAuth:
       type: http
