@@ -142,6 +142,12 @@ paths:
                     type: string
 components:
   schemas:
+    VaultCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The vault name.
     Credential:
       type: object
       properties:
@@ -175,12 +181,6 @@ components:
         created_at:
           type: string
           format: date-time
-    VaultCreateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The vault name.
   parameters:
     VaultId:
       name: vault_id

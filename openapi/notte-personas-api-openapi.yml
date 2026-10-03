@@ -135,6 +135,17 @@ components:
       schema:
         type: string
   schemas:
+    PersonaCreateRequest:
+      type: object
+      properties:
+        create_vault:
+          type: boolean
+          default: false
+          description: Whether to create a dedicated vault for the persona.
+        create_phone_number:
+          type: boolean
+          default: false
+          description: Whether to provision a phone number for the persona.
     PersonaResponse:
       type: object
       properties:
@@ -155,17 +166,6 @@ components:
         created_at:
           type: string
           format: date-time
-    PersonaCreateRequest:
-      type: object
-      properties:
-        create_vault:
-          type: boolean
-          default: false
-          description: Whether to create a dedicated vault for the persona.
-        create_phone_number:
-          type: boolean
-          default: false
-          description: Whether to provision a phone number for the persona.
   securitySchemes:
     BearerAuth:
       type: http

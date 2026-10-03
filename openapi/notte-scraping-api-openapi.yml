@@ -85,6 +85,20 @@ paths:
                       type: object
 components:
   schemas:
+    SearchRequest:
+      type: object
+      required:
+      - q
+      properties:
+        q:
+          type: string
+          description: The search query.
+        depth:
+          type: string
+          description: Search depth.
+        outputType:
+          type: string
+          description: Desired output type.
     ScrapeFromHtmlRequest:
       allOf:
       - $ref: '#/components/schemas/ScrapeRequest'
@@ -100,31 +114,6 @@ components:
                   type: string
                 url:
                   type: string
-    GlobalScrapeRequest:
-      allOf:
-      - $ref: '#/components/schemas/ScrapeRequest'
-      - type: object
-        required:
-        - url
-        properties:
-          url:
-            type: string
-            description: The URL to scrape.
-          headless:
-            type: boolean
-            default: true
-          solve_captchas:
-            type: boolean
-            default: false
-          proxies:
-            oneOf:
-            - type: boolean
-            - type: array
-              items:
-                type: object
-          browser_type:
-            type: string
-            default: chromium
     ScrapeRequest:
       type: object
       properties:
@@ -164,20 +153,31 @@ components:
         use_link_placeholders:
           type: boolean
           default: false
-    SearchRequest:
-      type: object
-      required:
-      - q
-      properties:
-        q:
-          type: string
-          description: The search query.
-        depth:
-          type: string
-          description: Search depth.
-        outputType:
-          type: string
-          description: Desired output type.
+    GlobalScrapeRequest:
+      allOf:
+      - $ref: '#/components/schemas/ScrapeRequest'
+      - type: object
+        required:
+        - url
+        properties:
+          url:
+            type: string
+            description: The URL to scrape.
+          headless:
+            type: boolean
+            default: true
+          solve_captchas:
+            type: boolean
+            default: false
+          proxies:
+            oneOf:
+            - type: boolean
+            - type: array
+              items:
+                type: object
+          browser_type:
+            type: string
+            default: chromium
     ScrapeResponse:
       type: object
       properties:

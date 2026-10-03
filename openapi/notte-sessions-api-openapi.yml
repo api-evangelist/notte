@@ -191,25 +191,6 @@ components:
       schema:
         type: string
   schemas:
-    Cookie:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        domain:
-          type: string
-        path:
-          type: string
-        expires:
-          type: number
-        httpOnly:
-          type: boolean
-        secure:
-          type: boolean
-        sameSite:
-          type: string
     SessionResponse:
       type: object
       properties:
@@ -258,22 +239,6 @@ components:
           type:
           - string
           - 'null'
-    SetCookiesRequest:
-      type: object
-      required:
-      - cookies
-      properties:
-        cookies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cookie'
-    CookiesResponse:
-      type: object
-      properties:
-        cookies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cookie'
     SessionStartRequest:
       type: object
       properties:
@@ -357,6 +322,41 @@ components:
           type:
           - string
           - 'null'
+    SetCookiesRequest:
+      type: object
+      required:
+      - cookies
+      properties:
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+    CookiesResponse:
+      type: object
+      properties:
+        cookies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+    Cookie:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        domain:
+          type: string
+        path:
+          type: string
+        expires:
+          type: number
+        httpOnly:
+          type: boolean
+        secure:
+          type: boolean
+        sameSite:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http
