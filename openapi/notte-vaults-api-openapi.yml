@@ -141,13 +141,26 @@ paths:
                   status:
                     type: string
 components:
+  parameters:
+    VaultId:
+      name: vault_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    VaultCreateRequest:
+    Vault:
       type: object
       properties:
-        name:
+        vault_id:
           type: string
-          description: The vault name.
+        name:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
     Credential:
       type: object
       properties:
@@ -169,25 +182,12 @@ components:
           type:
           - string
           - 'null'
-    Vault:
+    VaultCreateRequest:
       type: object
       properties:
-        vault_id:
-          type: string
         name:
-          type:
-          - string
-          - 'null'
-        created_at:
           type: string
-          format: date-time
-  parameters:
-    VaultId:
-      name: vault_id
-      in: path
-      required: true
-      schema:
-        type: string
+          description: The vault name.
   securitySchemes:
     BearerAuth:
       type: http

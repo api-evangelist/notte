@@ -145,6 +145,29 @@ components:
             type: array
             items:
               type: object
+    AgentResponse:
+      type: object
+      properties:
+        agent_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - closed
+        closed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        saved:
+          type: boolean
+          default: false
     AgentStartRequest:
       type: object
       required:
@@ -196,29 +219,6 @@ components:
           type:
           - object
           - 'null'
-    AgentResponse:
-      type: object
-      properties:
-        agent_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        session_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - active
-          - closed
-        closed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        saved:
-          type: boolean
-          default: false
   parameters:
     AgentId:
       name: agent_id

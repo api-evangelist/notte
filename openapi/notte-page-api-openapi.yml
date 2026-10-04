@@ -103,17 +103,6 @@ paths:
                 format: binary
 components:
   schemas:
-    StepResponse:
-      type: object
-      properties:
-        session_id:
-          type: string
-        success:
-          type: boolean
-        message:
-          type:
-          - string
-          - 'null'
     ObserveRequest:
       type: object
       properties:
@@ -137,6 +126,38 @@ components:
           - string
           - 'null'
           description: Perception strategy to apply.
+    ObserveResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+        screenshot:
+          type:
+          - string
+          - 'null'
+        space:
+          type: object
+          description: The action space - the set of available actions on the page.
+          properties:
+            actions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Action'
+    StepResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        success:
+          type: boolean
+        message:
+          type:
+          - string
+          - 'null'
     Action:
       type: object
       description: A single browser action. Examples include click, fill, check, scroll, goto, go_back, go_forward, reload, wait, press_key, select_dropdown_option, upload_file, download_file, scrape, and captcha_solve.
@@ -168,6 +189,33 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/Action'
+    ScrapeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        content:
+          type:
+          - string
+          - 'null'
+          description: The extracted main content (markdown).
+        structured:
+          type:
+          - object
+          - 'null'
+          description: AI-extracted structured data matching the response_format.
+        links:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
     ScrapeRequest:
       type: object
       properties:
@@ -207,54 +255,6 @@ components:
         use_link_placeholders:
           type: boolean
           default: false
-    ObserveResponse:
-      type: object
-      properties:
-        session_id:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-        screenshot:
-          type:
-          - string
-          - 'null'
-        space:
-          type: object
-          description: The action space - the set of available actions on the page.
-          properties:
-            actions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Action'
-    ScrapeResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        content:
-          type:
-          - string
-          - 'null'
-          description: The extracted main content (markdown).
-        structured:
-          type:
-          - object
-          - 'null'
-          description: AI-extracted structured data matching the response_format.
-        links:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
   parameters:
     SessionId:
       name: session_id

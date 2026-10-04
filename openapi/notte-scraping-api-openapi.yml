@@ -114,45 +114,6 @@ components:
                   type: string
                 url:
                   type: string
-    ScrapeRequest:
-      type: object
-      properties:
-        selector:
-          type:
-          - string
-          - 'null'
-          description: Optional CSS selector to scope extraction.
-        scrape_links:
-          type: boolean
-          default: false
-        scrape_images:
-          type: boolean
-          default: false
-        ignored_tags:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        only_main_content:
-          type: boolean
-          default: true
-        only_images:
-          type: boolean
-          default: false
-        response_format:
-          type:
-          - object
-          - 'null'
-          description: A JSON schema (e.g. derived from a Pydantic model) for AI-structured extraction.
-        instructions:
-          type:
-          - string
-          - 'null'
-          description: Natural-language extraction instructions.
-        use_link_placeholders:
-          type: boolean
-          default: false
     GlobalScrapeRequest:
       allOf:
       - $ref: '#/components/schemas/ScrapeRequest'
@@ -205,6 +166,45 @@ components:
           - 'null'
           items:
             type: string
+    ScrapeRequest:
+      type: object
+      properties:
+        selector:
+          type:
+          - string
+          - 'null'
+          description: Optional CSS selector to scope extraction.
+        scrape_links:
+          type: boolean
+          default: false
+        scrape_images:
+          type: boolean
+          default: false
+        ignored_tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        only_main_content:
+          type: boolean
+          default: true
+        only_images:
+          type: boolean
+          default: false
+        response_format:
+          type:
+          - object
+          - 'null'
+          description: A JSON schema (e.g. derived from a Pydantic model) for AI-structured extraction.
+        instructions:
+          type:
+          - string
+          - 'null'
+          description: Natural-language extraction instructions.
+        use_link_placeholders:
+          type: boolean
+          default: false
   securitySchemes:
     BearerAuth:
       type: http
