@@ -52,7 +52,7 @@ tags_raw:
 - Sessions
 - Scraping
 created: '2026-06-20'
-modified: '2026-06-20'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: notte:notte-agents-api
@@ -310,6 +310,8 @@ apis:
   - type: APIReference
     url: https://docs.notte.cc/api-reference/personas/persona-create
 common:
+- url: https://www.notte.cc/blog
+  type: Blog
 - type: AgenticAccess
   url: agentic-access/notte-agentic-access.yml
 - type: DomainSecurity
