@@ -310,6 +310,8 @@ apis:
   - type: APIReference
     url: https://docs.notte.cc/api-reference/personas/persona-create
 common:
+- type: Pricing
+  url: https://www.notte.cc/pricing
 - url: https://www.notte.cc/blog
   type: Blog
 - type: AgenticAccess
