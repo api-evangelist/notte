@@ -103,6 +103,45 @@ paths:
                 format: binary
 components:
   schemas:
+    ScrapeRequest:
+      type: object
+      properties:
+        selector:
+          type:
+          - string
+          - 'null'
+          description: Optional CSS selector to scope extraction.
+        scrape_links:
+          type: boolean
+          default: false
+        scrape_images:
+          type: boolean
+          default: false
+        ignored_tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        only_main_content:
+          type: boolean
+          default: true
+        only_images:
+          type: boolean
+          default: false
+        response_format:
+          type:
+          - object
+          - 'null'
+          description: A JSON schema (e.g. derived from a Pydantic model) for AI-structured extraction.
+        instructions:
+          type:
+          - string
+          - 'null'
+          description: Natural-language extraction instructions.
+        use_link_placeholders:
+          type: boolean
+          default: false
     ObserveRequest:
       type: object
       properties:
@@ -126,38 +165,6 @@ components:
           - string
           - 'null'
           description: Perception strategy to apply.
-    ObserveResponse:
-      type: object
-      properties:
-        session_id:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-        screenshot:
-          type:
-          - string
-          - 'null'
-        space:
-          type: object
-          description: The action space - the set of available actions on the page.
-          properties:
-            actions:
-              type: array
-              items:
-                $ref: '#/components/schemas/Action'
-    StepResponse:
-      type: object
-      properties:
-        session_id:
-          type: string
-        success:
-          type: boolean
-        message:
-          type:
-          - string
-          - 'null'
     Action:
       type: object
       description: A single browser action. Examples include click, fill, check, scroll, goto, go_back, go_forward, reload, wait, press_key, select_dropdown_option, upload_file, download_file, scrape, and captcha_solve.
@@ -216,45 +223,38 @@ components:
           - 'null'
           items:
             type: string
-    ScrapeRequest:
+    ObserveResponse:
       type: object
       properties:
-        selector:
+        session_id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+        screenshot:
           type:
           - string
           - 'null'
-          description: Optional CSS selector to scope extraction.
-        scrape_links:
+        space:
+          type: object
+          description: The action space - the set of available actions on the page.
+          properties:
+            actions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Action'
+    StepResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        success:
           type: boolean
-          default: false
-        scrape_images:
-          type: boolean
-          default: false
-        ignored_tags:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        only_main_content:
-          type: boolean
-          default: true
-        only_images:
-          type: boolean
-          default: false
-        response_format:
-          type:
-          - object
-          - 'null'
-          description: A JSON schema (e.g. derived from a Pydantic model) for AI-structured extraction.
-        instructions:
+        message:
           type:
           - string
           - 'null'
-          description: Natural-language extraction instructions.
-        use_link_placeholders:
-          type: boolean
-          default: false
   parameters:
     SessionId:
       name: session_id

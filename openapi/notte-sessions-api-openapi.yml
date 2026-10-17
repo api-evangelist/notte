@@ -184,75 +184,10 @@ paths:
                 $ref: '#/components/schemas/CookiesResponse'
 components:
   schemas:
-    Cookie:
+    SetCookiesRequest:
       type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        domain:
-          type: string
-        path:
-          type: string
-        expires:
-          type: number
-        httpOnly:
-          type: boolean
-        secure:
-          type: boolean
-        sameSite:
-          type: string
-    SessionResponse:
-      type: object
-      properties:
-        session_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - active
-          - closed
-          - error
-          - timed_out
-        created_at:
-          type: string
-          format: date-time
-        last_accessed_at:
-          type: string
-          format: date-time
-        idle_timeout_minutes:
-          type: integer
-        max_duration_minutes:
-          type: integer
-        browser_type:
-          type: string
-        user_agent:
-          type:
-          - string
-          - 'null'
-        viewport_width:
-          type:
-          - integer
-          - 'null'
-        viewport_height:
-          type:
-          - integer
-          - 'null'
-        network_request_bytes:
-          type: integer
-        network_response_bytes:
-          type: integer
-        viewer_url:
-          type:
-          - string
-          - 'null'
-        cdp_url:
-          type:
-          - string
-          - 'null'
-    CookiesResponse:
-      type: object
+      required:
+      - cookies
       properties:
         cookies:
           type: array
@@ -341,10 +276,75 @@ components:
           type:
           - string
           - 'null'
-    SetCookiesRequest:
+    SessionResponse:
       type: object
-      required:
-      - cookies
+      properties:
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - closed
+          - error
+          - timed_out
+        created_at:
+          type: string
+          format: date-time
+        last_accessed_at:
+          type: string
+          format: date-time
+        idle_timeout_minutes:
+          type: integer
+        max_duration_minutes:
+          type: integer
+        browser_type:
+          type: string
+        user_agent:
+          type:
+          - string
+          - 'null'
+        viewport_width:
+          type:
+          - integer
+          - 'null'
+        viewport_height:
+          type:
+          - integer
+          - 'null'
+        network_request_bytes:
+          type: integer
+        network_response_bytes:
+          type: integer
+        viewer_url:
+          type:
+          - string
+          - 'null'
+        cdp_url:
+          type:
+          - string
+          - 'null'
+    Cookie:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        domain:
+          type: string
+        path:
+          type: string
+        expires:
+          type: number
+        httpOnly:
+          type: boolean
+        secure:
+          type: boolean
+        sameSite:
+          type: string
+    CookiesResponse:
+      type: object
       properties:
         cookies:
           type: array

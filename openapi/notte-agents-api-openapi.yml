@@ -125,49 +125,14 @@ paths:
                   code:
                     type: string
 components:
+  parameters:
+    AgentId:
+      name: agent_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    AgentStatusResponse:
-      allOf:
-      - $ref: '#/components/schemas/AgentResponse'
-      - type: object
-        properties:
-          task:
-            type: string
-          success:
-            type:
-            - boolean
-            - 'null'
-          answer:
-            type:
-            - string
-            - 'null'
-          steps:
-            type: array
-            items:
-              type: object
-    AgentResponse:
-      type: object
-      properties:
-        agent_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        session_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - active
-          - closed
-        closed_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        saved:
-          type: boolean
-          default: false
     AgentStartRequest:
       type: object
       required:
@@ -219,13 +184,48 @@ components:
           type:
           - object
           - 'null'
-  parameters:
-    AgentId:
-      name: agent_id
-      in: path
-      required: true
-      schema:
-        type: string
+    AgentResponse:
+      type: object
+      properties:
+        agent_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - active
+          - closed
+        closed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        saved:
+          type: boolean
+          default: false
+    AgentStatusResponse:
+      allOf:
+      - $ref: '#/components/schemas/AgentResponse'
+      - type: object
+        properties:
+          task:
+            type: string
+          success:
+            type:
+            - boolean
+            - 'null'
+          answer:
+            type:
+            - string
+            - 'null'
+          steps:
+            type: array
+            items:
+              type: object
   securitySchemes:
     BearerAuth:
       type: http
