@@ -44,7 +44,7 @@ tags:
 - Web Agents
 - Browser Automation
 - Sessions
-- Scraping
+- Web Scraping
 tags_raw:
 - AI
 - Web Agents
@@ -205,6 +205,8 @@ apis:
   humanURL: https://docs.notte.cc/api-reference/sessions/session-start
   baseURL: https://api.notte.cc
   tags:
+  - Web Scraping
+  tags_raw:
   - Scraping
   properties:
   - type: OpenAPI
