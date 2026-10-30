@@ -1,4 +1,4 @@
-# Notte (notte)
+# Notte
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,145 +66,137 @@
 
 Notte is web browser and agent infrastructure for AI. The REST API at api.notte.cc provisions cloud browser sessions, runs autonomous web agents from natural-language tasks, observes and acts on pages, scrapes structured data, and manages personas, vaults, profiles, and serverless functions. The core framework is open source (SSPL-1.0) on GitHub under nottelabs.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/notte/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/notte/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Web Agents · Browser Automation · Sessions · Web Scraping
 
-## Tags
+## Notte on APIs.io
 
-- AI
-- Web Agents
-- Browser Automation
-- Sessions
-- Scraping
+Everything profiled for Notte is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/notte/](https://apis.io/providers/notte/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Notte Agents API](https://apis.io/apis/notte/notte-agents-api/) — Run autonomous web agents from natural-language tasks.
+- [Notte Health API](https://apis.io/apis/notte/notte-health-api/) — Service health check.
+- [Notte Page API](https://apis.io/apis/notte/notte-page-api/) — Perception layer - observe, step (execute), and scrape a live session page.
+- [Notte Personas API](https://apis.io/apis/notte/notte-personas-api/) — Disposable digital identities with email, phone, and 2FA.
+- [Notte Scraping API](https://apis.io/apis/notte/notte-scraping-api/) — One-shot scraping of a URL or raw HTML, plus AI web search.
+- [Notte Sessions API](https://apis.io/apis/notte/notte-sessions-api/) — Create and manage remote cloud browser sessions.
+- [Notte Vaults API](https://apis.io/apis/notte/notte-vaults-api/) — Secure credential and credit-card storage injected into runs.
 
-## APIs
+### Published properties
 
-### Notte Sessions API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Start, status, and stop remote cloud browser sessions with stealth, proxies, and CAPTCHA solving. Manage cookies, network logs, replay, debug info, and CDP/viewer connection URLs for Playwright, Puppeteer, Selenium, or browser-use.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.notte.cc/api-reference/sessions/session-start](https://docs.notte.cc/api-reference/sessions/session-start)
-- **Base URL:** `https://api.notte.cc`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [notte](https://apis.io/servers/notte/notte/)
 
-- Sessions
-- Cloud Browser
-- CDP
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.notte.cc/features/sessions/overview)
-- [API Reference](https://docs.notte.cc/api-reference/sessions/session-start)
-- [OpenAPI](openapi/notte-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/notte.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/notte.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/nottelabs/notte)
+- [Notte Agentic Access](https://apis.io/agentic-access/notte/notte-agentic-access/)
 
-### Notte Agents API
+#### Collections (8)
 
-Run autonomous web agents that take a natural-language task and act on a browser session. Start, poll status, stop, list agents, request structured (Pydantic) output, and retrieve the generated workflow script.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs.notte.cc/api-reference/agents/agent-start](https://docs.notte.cc/api-reference/agents/agent-start)
-- **Base URL:** `https://api.notte.cc`
+- [Notte API](https://apis.io/collections/notte/open-notte/)
+- [Notte Agents API](https://apis.io/collections/notte/open-notte-agents-api/)
+- [Notte Agents Health API](https://apis.io/collections/notte/open-notte-health-api/)
+- [Notte Agents Page API](https://apis.io/collections/notte/open-notte-page-api/)
+- [Notte Agents Personas API](https://apis.io/collections/notte/open-notte-personas-api/)
+- [Notte Agents Scraping API](https://apis.io/collections/notte/open-notte-scraping-api/)
+- [Notte Agents Sessions API](https://apis.io/collections/notte/open-notte-sessions-api/)
+- [Notte Agents Vaults API](https://apis.io/collections/notte/open-notte-vaults-api/)
 
-#### Tags
+#### Security (2)
 
-- Agents
-- Autonomous
-- Natural Language
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Notte Authentication](https://apis.io/security/notte/notte-authentication/)
+- [Notte Domain Security](https://apis.io/security/notte/notte-domain-security/)
 
-- [Documentation](https://docs.notte.cc/features/agents/overview)
-- [API Reference](https://docs.notte.cc/api-reference/agents/agent-start)
-- [OpenAPI](openapi/notte-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/notte.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/notte.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/nottelabs/notte)
+#### Plans and pricing (1)
 
-### Notte Page Observe / Step / Scrape API
+Published plans, tiers and prices.
 
-Notte's perception layer for a live session - observe the page to list available actions, execute (step) an action such as click/fill/scroll/navigate, scrape structured content from the current page, and capture screenshots.
+- [Notte Plans Pricing](https://apis.io/plans/notte/notte-plans-pricing/)
 
-- **Human URL:** [https://docs.notte.cc/api-reference/sessions/page-observe](https://docs.notte.cc/api-reference/sessions/page-observe)
-- **Base URL:** `https://api.notte.cc`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Perception
-- Observe
-- Step
-- Scrape
+- [Notte Rate Limits](https://apis.io/rate-limits/notte/notte-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://docs.notte.cc/features/perception/overview)
-- [API Reference](https://docs.notte.cc/api-reference/sessions/page-observe)
-- [OpenAPI](openapi/notte-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/notte.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/notte.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/nottelabs/notte)
+What the API costs to run, by operation.
 
-### Notte Scraping API
+- [Notte Finops](https://apis.io/finops/notte/notte-finops/)
 
-One-shot scraping endpoints that fetch a URL (or accept raw HTML) and return main content, links, images, or AI-extracted structured data against a response format, plus an AI web search endpoint.
+## Where to find this API
 
-- **Human URL:** [https://docs.notte.cc/api-reference/scrape/scrape-webpage](https://docs.notte.cc/api-reference/scrape/scrape-webpage)
-- **Base URL:** `https://api.notte.cc`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Scraping
-- Extraction
-- Structured Data
-
-#### Properties
-
-- [Documentation](https://docs.notte.cc/features/scraping/overview)
-- [API Reference](https://docs.notte.cc/api-reference/scrape/scrape-webpage)
-- [OpenAPI](openapi/notte-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/notte.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/notte.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/nottelabs/notte)
-
-### Notte Personas and Vaults API
-
-Personas are disposable digital identities with email addresses, phone numbers, and automated 2FA for account workflows. Vaults securely store credentials and credit cards that are injected into agent and session runs.
-
-- **Human URL:** [https://docs.notte.cc/api-reference/personas/persona-create](https://docs.notte.cc/api-reference/personas/persona-create)
-- **Base URL:** `https://api.notte.cc`
-
-#### Tags
-
-- Personas
-- Vaults
-- Credentials
-
-#### Properties
-
-- [Documentation](https://docs.notte.cc/features/personas/overview)
-- [API Reference](https://docs.notte.cc/api-reference/personas/persona-create)
-- [OpenAPI](openapi/notte-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/notte.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/notte.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/nottelabs/notte)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/nottelabs)
-- [LinkedIn](https://www.linkedin.com/company/nottelabs)
 - [Website](https://notte.cc)
 - [Documentation](https://docs.notte.cc)
-- [Plans](plans/notte-plans-pricing.yml)
-- [Rate Limits](rate-limits/notte-rate-limits.yml)
-- [Fin Ops](finops/notte-finops.yml)
+- [Pricing](https://www.notte.cc/pricing)
+- [Blog](https://www.notte.cc/blog)
+- [GitHub](https://github.com/nottelabs)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 32.9** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 48.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 42.1 |
+
+**Agent readiness 46.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/notte/](https://apis.io/providers/notte/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Notte: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/notte/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
